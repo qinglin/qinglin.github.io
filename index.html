@@ -81,14 +81,14 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/13/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2016/07/14/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
 		
   <p class="article-time">
-    <time datetime="2016-07-14T02:28:22.615Z" itemprop="datePublished"> 发表于 2016-07-13</time>
+    <time datetime="2016-07-14T05:43:00.435Z" itemprop="datePublished"> 发表于 2016-07-14</time>
     
   </p>
 </header>
@@ -154,15 +154,16 @@
         
         <h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>Centos服务器+Windows客户端</p>
 <h2 id="Github-io"><a href="#Github-io" class="headerlink" title="Github.io"></a>Github.io</h2><p>亲爱哒Github为每位用户提供了一个域名，只需注册成为Github用户，将代码提交到指定repository下，就可以在域名下看到自己的网站了。</p>
-<p>###创建一个repository<br>在Github下创建一个repository，命名为username.github.io，username就是你的github用户名（如果repository名字和你的github用户名不一致，域名就不会生效）</p>
+<h3 id="创建一个repository"><a href="#创建一个repository" class="headerlink" title="创建一个repository"></a>创建一个repository</h3><p>在Github下创建一个repository，命名为username.github.io，username就是你的github用户名（如果repository名字和你的github用户名不一致，域名就不会生效）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">譬如：</div><div class="line">如果你的github用户名为Gitdog,那么repository就需被命名为Gitdog.github.io</div></pre></td></tr></table></figure>
 <p><img src="http://i.imgur.com/XGaEI4n.png" alt=""></p>
-<p>###Clone Repository到Linux<br>将Repository下载到你想存放的文件夹下</p>
-<ol>
+<h3 id="Clone-Repository到Linux"><a href="#Clone-Repository到Linux" class="headerlink" title="Clone Repository到Linux"></a>Clone Repository到Linux</h3><p>将Repository下载到你想存放的文件夹下</p>
+<ul>
 <li>去到你想存放repository的文件夹下</li>
-<li><figure class="highlight plain"><figcaption><span>clone</span><a href="https://github.com/username/username.github.io```" target="_blank" rel="external">link</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###创建一个Hello World页面</div><div class="line"></div><div class="line">1. ``` cd username.github.io</div></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><figcaption><span>"Hello World" > index.html``` </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 将repository上传到Git</div><div class="line">1. ``` git add --all</div></pre></td></tr></table></figure>
+<li><code>git clone https://github.com/username/username.github.io</code></li>
+</ul>
+<h3 id="创建一个Hello-World页面"><a href="#创建一个Hello-World页面" class="headerlink" title="创建一个Hello World页面"></a>创建一个Hello World页面</h3><ol>
+<li><figure class="highlight plain"><figcaption><span>username.github.io```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">2. ``` echo &quot;Hello World&quot; &gt; index.html``` </div><div class="line"></div><div class="line">### 将repository上传到Git</div><div class="line">1. ``` git add --all</div></pre></td></tr></table></figure>
 </li>
 <li><figure class="highlight plain"><figcaption><span>commit -m "Initial commit"```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3. ```git push -u origin master</div></pre></td></tr></table></figure>
 </li>
@@ -171,8 +172,7 @@
 <p>More Info: <a href="https://pages.github.com/" target="_blank" rel="external">官方文档</a></p>
 <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <p><a href="https://hexo.io/" target="_blank" rel="external">Hexo.io官网</a></p>
-<p>###安装Node.js</p>
-<pre><code>- wget http://nodejs.org/dist/v0.6.1/node-v0.6.1.tar.gz 
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><pre><code>- wget http://nodejs.org/dist/v0.6.1/node-v0.6.1.tar.gz 
 - tar -vzxf node-v0.6.1.tar.gz 
 - cd node-v0.6.1
 - ./configure
@@ -221,16 +221,15 @@ npm install hexo-renderer-marked@0.2 --save
 npm install hexo-renderer-stylus@0.2 --save
 npm install hexo-generator-feed@1 --save
 npm install hexo-generator-sitemap@1 --save
-</code></pre><h2 id="使用Hexo博客框架搭建Github-io博客"><a href="#使用Hexo博客框架搭建Github-io博客" class="headerlink" title="使用Hexo博客框架搭建Github.io博客"></a>使用Hexo博客框架搭建Github.io博客</h2><p>####选择Hexo主题<br>Hexo有许多高大上的博客模板，简单易用，白狗这里用的是Jacman (<a href="http://wsgzao.github.io/post/hexo-jacman/" target="_blank" rel="external">Jacman</a>)</p>
+</code></pre><h2 id="使用Hexo博客框架搭建Github-io博客"><a href="#使用Hexo博客框架搭建Github-io博客" class="headerlink" title="使用Hexo博客框架搭建Github.io博客"></a>使用Hexo博客框架搭建Github.io博客</h2><h4 id="选择Hexo主题"><a href="#选择Hexo主题" class="headerlink" title="选择Hexo主题"></a>选择Hexo主题</h4><p>Hexo有许多高大上的博客模板，简单易用，白狗这里用的是Jacman (<a href="http://wsgzao.github.io/post/hexo-jacman/" target="_blank" rel="external">Jacman</a>)</p>
 <p>主题更换方法很简单，一般是去github clone源代码到hexo/themes文件夹下，再修改_config.yml文件下的theme栏</p>
 <p><img src="http://i.imgur.com/84mnGRp.png" alt=""></p>
-<p>####生成博客</p>
-<pre><code>1. 执行hexo g命令会生成一个public文件夹
+<h4 id="生成博客"><a href="#生成博客" class="headerlink" title="生成博客"></a>生成博客</h4><pre><code>1. 执行hexo g命令会生成一个public文件夹
 2. 将public文件夹下的内容全部拷贝到git repository文件夹下
 3. 将git repository文件夹下的内容同步到github上
 4. 刷新http://username.github.io查看吧
 </code></pre><p>下图为搭建完的博客<br> <img src="http://i.imgur.com/n3ToGEk.png" alt=""></p>
-<p>####页面修改<br>要生成新的页面或修改页面，都需要在hexo init的文件夹下执行hexo命令，再将修改完的结果同步更新到git repository和github上去，就可以在<a href="http://username.github.io上看到更新的效果了！" target="_blank" rel="external">http://username.github.io上看到更新的效果了！</a></p>
+<h4 id="页面修改"><a href="#页面修改" class="headerlink" title="页面修改"></a>页面修改</h4><p>要生成新的页面或修改页面，都需要在hexo init的文件夹下执行hexo命令，再将修改完的结果同步更新到git repository和github上去，就可以在<a href="http://username.github.io上看到更新的效果了！" target="_blank" rel="external">http://username.github.io上看到更新的效果了！</a></p>
 <ul>
 <li><p>生成新的页面</p>
   <figure class="highlight plain"><figcaption><span>new "My new post"```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- 生成静态站点</div><div class="line"></div><div class="line">	```hexo generate</div></pre></td></tr></table></figure>
