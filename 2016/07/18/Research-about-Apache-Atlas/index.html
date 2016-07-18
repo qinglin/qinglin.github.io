@@ -11,15 +11,49 @@
     
 
     
-    <meta name="description" content="John 4:18 - There is no fear in love; but perfect love casteth out fear">
-<meta property="og:type" content="website">
+    <meta name="description" content="Apache Atlas详解By Qinglin,Xia
+什么是Atlas？
+Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题
+
+数据孤岛与数据湖数据孤岛
+数据孤岛是目前大数据领域面对的一">
+<meta property="og:type" content="article">
 <meta property="og:title" content="White Dog's Blog">
-<meta property="og:url" content="http://qinglin.github.io/index.html">
+<meta property="og:url" content="http://qinglin.github.io/2016/07/18/Research-about-Apache-Atlas/index.html">
 <meta property="og:site_name" content="White Dog's Blog">
-<meta property="og:description" content="John 4:18 - There is no fear in love; but perfect love casteth out fear">
+<meta property="og:description" content="Apache Atlas详解By Qinglin,Xia
+什么是Atlas？
+Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题
+
+数据孤岛与数据湖数据孤岛
+数据孤岛是目前大数据领域面对的一">
+<meta property="og:image" content="http://i.imgur.com/DdrGsEN.png">
+<meta property="og:image" content="http://i.imgur.com/jVm0We9.png">
+<meta property="og:image" content="http://i.imgur.com/qdL7ViY.png">
+<meta property="og:image" content="http://i.imgur.com/FgDCGgX.png">
+<meta property="og:image" content="http://i.imgur.com/7pEgcNp.png">
+<meta property="og:image" content="http://i.imgur.com/vKubWUr.png">
+<meta property="og:image" content="http://i.imgur.com/uuZaSIL.png">
+<meta property="og:image" content="http://i.imgur.com/hhqnImj.png">
+<meta property="og:image" content="http://i.imgur.com/7LWI5Dx.png">
+<meta property="og:image" content="http://i.imgur.com/raYQMwv.png">
+<meta property="og:image" content="http://i.imgur.com/fsM4RVz.png">
+<meta property="og:image" content="http://i.imgur.com/I2VuECt.png">
+<meta property="og:image" content="http://i.imgur.com/SgHbrzC.png">
+<meta property="og:image" content="http://i.imgur.com/SywM5wC.png">
+<meta property="og:image" content="http://i.imgur.com/UdDRczg.png">
+<meta property="og:image" content="http://i.imgur.com/3pZmcft.png">
+<meta property="og:image" content="http://i.imgur.com/wWTACl0.png">
+<meta property="og:updated_time" content="2016-07-18T08:28:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="White Dog's Blog">
-<meta name="twitter:description" content="John 4:18 - There is no fear in love; but perfect love casteth out fear">
+<meta name="twitter:description" content="Apache Atlas详解By Qinglin,Xia
+什么是Atlas？
+Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题
+
+数据孤岛与数据湖数据孤岛
+数据孤岛是目前大数据领域面对的一">
+<meta name="twitter:image" content="http://i.imgur.com/DdrGsEN.png">
 
     
     <link rel="alternative" href="/atom.xml" title="White Dog&#39;s Blog" type="application/atom+xml">
@@ -73,70 +107,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/18/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-18T08:28:10.840Z" itemprop="datePublished"> 发表于 2016-07-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2016/07/18/Research-about-Apache-Atlas/" title="" itemprop="url"></a>
@@ -150,9 +124,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="Apache-Atlas详解"><a href="#Apache-Atlas详解" class="headerlink" title="Apache Atlas详解"></a>Apache Atlas详解</h1><p>By Qinglin,Xia</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Atlas详解"><span class="toc-number">1.</span> <span class="toc-text">Apache Atlas详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Atlas？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Atlas？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据孤岛与数据湖"><span class="toc-number">1.2.</span> <span class="toc-text">数据孤岛与数据湖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据湖"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据湖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas可以做什么？"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas可以做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#你面对的问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">你面对的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Atlas的解决方式"><span class="toc-number">1.3.2.</span> <span class="toc-text">Atlas的解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Atlas的功能"><span class="toc-number">1.4.</span> <span class="toc-text">Apache Atlas的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据分类"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中化审计"><span class="toc-number">1.4.2.</span> <span class="toc-text">集中化审计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索-amp-血缘-查看"><span class="toc-number">1.4.3.</span> <span class="toc-text">搜索 & 血缘(查看)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全-amp-政策-引擎"><span class="toc-number">1.4.4.</span> <span class="toc-text">安全&政策 引擎</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas-的架构"><span class="toc-number">1.5.</span> <span class="toc-text">Atlas 的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要模块"><span class="toc-number">1.5.1.</span> <span class="toc-text">主要模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridges"><span class="toc-number">1.5.2.</span> <span class="toc-text">Bridges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notification"><span class="toc-number">1.5.3.</span> <span class="toc-text">Notification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache-Atlas的应用"><span class="toc-number">1.5.4.</span> <span class="toc-text">Apache Atlas的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Knowledge-Store"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">Apache Atlas – Knowledge Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Data-Life-Management"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">Apache Atlas – Data Life Management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Audit-Store"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">Apache Atlas – Audit Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Policy-Engine"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">Apache Atlas – Policy Engine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Security"><span class="toc-number">1.5.4.5.</span> <span class="toc-text">Apache Atlas – Security</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-System"><span class="toc-number">1.6.</span> <span class="toc-text">Type System</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Types-Overview"><span class="toc-number">1.6.1.</span> <span class="toc-text">Data Types Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Types-Instances-Overview"><span class="toc-number">1.6.2.</span> <span class="toc-text">Types Instances Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Search"><span class="toc-number">1.7.</span> <span class="toc-text">Search</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Falcon-UI"><span class="toc-number">1.7.1.</span> <span class="toc-text">Falcon UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walk-Through-A-Use-Case"><span class="toc-number">1.8.</span> <span class="toc-text">Walk Through A Use Case</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collect-Data"><span class="toc-number">1.8.1.</span> <span class="toc-text">Collect Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-on-Atlas"><span class="toc-number">1.8.2.</span> <span class="toc-text">Search on Atlas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-DB"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">Search based on DB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-Application"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">Search based on Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表格元数据"><span class="toc-number">1.8.2.3.</span> <span class="toc-text">表格元数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#血缘"><span class="toc-number">1.8.2.4.</span> <span class="toc-text">血缘</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Apache-Atlas详解"><a href="#Apache-Atlas详解" class="headerlink" title="Apache Atlas详解"></a>Apache Atlas详解</h1><p>By Qinglin,Xia</p>
 <h2 id="什么是Atlas？"><a href="#什么是Atlas？" class="headerlink" title="什么是Atlas？"></a>什么是Atlas？</h2><blockquote>
 <p>Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题</p>
 </blockquote>
@@ -297,188 +278,61 @@
 <h4 id="Search-based-on-Application"><a href="#Search-based-on-Application" class="headerlink" title="Search based on Application"></a>Search based on Application</h4><p><img src="http://i.imgur.com/UdDRczg.png" alt=""></p>
 <h4 id="表格元数据"><a href="#表格元数据" class="headerlink" title="表格元数据"></a>表格元数据</h4><p><img src="http://i.imgur.com/3pZmcft.png" alt=""></p>
 <h4 id="血缘"><a href="#血缘" class="headerlink" title="血缘"></a>血缘</h4><p><img src="http://i.imgur.com/wWTACl0.png" alt=""></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/13/Github-io-with-Hexo/" title="在Linux环境下使用Github.io和Hexo搭建博客" itemprop="url">在Linux环境下使用Github.io和Hexo搭建博客</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-14T01:28:18.000Z" itemprop="datePublished"> 发表于 2016-07-13</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>Centos服务器+Windows客户端</p>
-<h2 id="Github-io"><a href="#Github-io" class="headerlink" title="Github.io"></a>Github.io</h2><p>亲爱哒Github为每位用户提供了一个域名，只需注册成为Github用户，将代码提交到指定repository下，就可以在域名下看到自己的网站了。</p>
-<h3 id="创建一个repository"><a href="#创建一个repository" class="headerlink" title="创建一个repository"></a>创建一个repository</h3><p>在Github下创建一个repository，命名为username.github.io，username就是你的github用户名（如果repository名字和你的github用户名不一致，域名就不会生效）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">譬如：</div><div class="line">如果你的github用户名为Gitdog,那么repository就需被命名为Gitdog.github.io</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/XGaEI4n.png" alt=""></p>
-<h3 id="Clone-Repository到Linux"><a href="#Clone-Repository到Linux" class="headerlink" title="Clone Repository到Linux"></a>Clone Repository到Linux</h3><p>将Repository下载到你想存放的文件夹下</p>
-<ul>
-<li>去到你想存放repository的文件夹下</li>
-<li><code>git clone https://github.com/username/username.github.io</code></li>
-</ul>
-<h3 id="创建一个Hello-World页面"><a href="#创建一个Hello-World页面" class="headerlink" title="创建一个Hello World页面"></a>创建一个Hello World页面</h3><ol>
-<li><code>cd username.github.io</code></li>
-<li><code>echo &quot;Hello World&quot; &gt; index.html</code> </li>
-</ol>
-<h3 id="将repository上传到Git"><a href="#将repository上传到Git" class="headerlink" title="将repository上传到Git"></a>将repository上传到Git</h3><ol>
-<li><code>git add --all</code></li>
-<li><code>git commit -m &quot;Initial commit&quot;</code></li>
-<li><code>git push -u origin master</code></li>
-</ol>
-<h3 id="Done"><a href="#Done" class="headerlink" title="Done!"></a>Done!</h3><p>这样就完成了github.io域名的搭建，随便找一个浏览器然后打开<a href="http://username.github.io查看吧" target="_blank" rel="external">http://username.github.io查看吧</a></p>
-<p>More Info: <a href="https://pages.github.com/" target="_blank" rel="external">官方文档</a></p>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p><a href="https://hexo.io/" target="_blank" rel="external">Hexo.io官网</a></p>
-<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><pre><code>- wget http://nodejs.org/dist/v0.6.1/node-v0.6.1.tar.gz 
-- tar -vzxf node-v0.6.1.tar.gz 
-- cd node-v0.6.1
-- ./configure
-- make
-- make install
-</code></pre><p>顺利安装完后检查一下是否安装成功</p>
-<pre><code>node -V
-</code></pre><p>检查是否返回</p>
-<pre><code>v0.6.1
-</code></pre><p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.JS</a></p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>使用npm命令安装</p>
-<pre><code>npm install hexo-cli -g
-npm install hexo --save
-
-#如果命令无法运行，可以尝试更换taobao的npm源
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-</code></pre><h4 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h4><p>随意选择自己喜好的位置存放hexo文件夹，最好和之前生成的git repositroy在同一个文件夹下</p>
-<pre><code>hexo init
-
-#安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。
-$ hexo init &lt;folder&gt;
-$ cd &lt;folder&gt;
-$ npm install
-
-#新建完成后，指定文件夹的目录如下
-.
-├── _config.yml
-├── package.json
-├── scaffolds
-├── scripts
-├── source
-|      ├── _drafts
-|      └── _posts
-└── themes
-</code></pre><h4 id="安装Hexo插件"><a href="#安装Hexo插件" class="headerlink" title="安装Hexo插件"></a>安装Hexo插件</h4><pre><code>npm install hexo-generator-index --save
-npm install hexo-generator-archive --save
-npm install hexo-generator-category --save
-npm install hexo-generator-tag --save
-npm install hexo-server --save
-npm install hexo-deployer-git --save
-npm install hexo-deployer-heroku --save
-npm install hexo-deployer-rsync --save
-npm install hexo-deployer-openshift --save
-npm install hexo-renderer-marked@0.2 --save
-npm install hexo-renderer-stylus@0.2 --save
-npm install hexo-generator-feed@1 --save
-npm install hexo-generator-sitemap@1 --save
-</code></pre><h2 id="使用Hexo博客框架搭建Github-io博客"><a href="#使用Hexo博客框架搭建Github-io博客" class="headerlink" title="使用Hexo博客框架搭建Github.io博客"></a>使用Hexo博客框架搭建Github.io博客</h2><h3 id="选择Hexo主题"><a href="#选择Hexo主题" class="headerlink" title="选择Hexo主题"></a>选择Hexo主题</h3><p>Hexo有许多高大上的博客模板，简单易用，白狗这里用的是Jacman (<a href="http://wsgzao.github.io/post/hexo-jacman/" target="_blank" rel="external">Jacman</a>)</p>
-<p>主题更换方法很简单，一般是去github clone源代码到hexo/themes文件夹下，再修改_config.yml文件下的theme栏</p>
-<p><img src="http://i.imgur.com/84mnGRp.png" alt=""></p>
-<h3 id="生成博客"><a href="#生成博客" class="headerlink" title="生成博客"></a>生成博客</h3><pre><code>1. 执行hexo g命令会生成一个public文件夹
-2. 将public文件夹下的内容全部拷贝到git repository文件夹下
-3. 将git repository文件夹下的内容同步到github上
-4. 刷新http://username.github.io查看吧
-</code></pre><p>下图为搭建完的博客<br> <img src="http://i.imgur.com/n3ToGEk.png" alt=""></p>
-<h3 id="页面修改"><a href="#页面修改" class="headerlink" title="页面修改"></a>页面修改</h3><p>要生成新的页面或修改页面，都需要在hexo init的文件夹下执行hexo命令，再将修改完的结果同步更新到git repository和github上去，就可以在<a href="http://username.github.io上看到更新的效果了！" target="_blank" rel="external">http://username.github.io上看到更新的效果了！</a></p>
-<ul>
-<li><p>生成新的页面</p>
-<p>   <code>hexo new &quot;My new post&quot;</code></p>
-</li>
-<li><p>生成静态站点</p>
-<p>  <code>hexo generate</code></p>
-</li>
-<li><p>Run Server</p>
-<p>  <code>hexo server</code></p>
-</li>
-<li><p>部署站点</p>
-<p>  <code>hexo deploy</code></p>
-</li>
-</ul>
-<p>More Info: <a href="https://hexo.io/docs/" target="_blank" rel="external">Hexo Docs</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/Github-Hexo-博客，Linux/">Github, Hexo, 博客，Linux</a>
-  </div>
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
 
 </div>
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://qinglin.github.io/2016/07/18/Research-about-Apache-Atlas/" data-title="White Dog&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/18/hello-world/" title="Hello World">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hello World</span>
+</a>
 </div>
+
+
+<div class="next">
+<a href="/2016/07/13/Github-io-with-Hexo/"  title="在Linux环境下使用Github.io和Hexo搭建博客">
+ <strong>下一篇：</strong><br/> 
+ <span>在Linux环境下使用Github.io和Hexo搭建博客
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Atlas详解"><span class="toc-number">1.</span> <span class="toc-text">Apache Atlas详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Atlas？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Atlas？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据孤岛与数据湖"><span class="toc-number">1.2.</span> <span class="toc-text">数据孤岛与数据湖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据湖"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据湖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas可以做什么？"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas可以做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#你面对的问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">你面对的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Atlas的解决方式"><span class="toc-number">1.3.2.</span> <span class="toc-text">Atlas的解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Atlas的功能"><span class="toc-number">1.4.</span> <span class="toc-text">Apache Atlas的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据分类"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中化审计"><span class="toc-number">1.4.2.</span> <span class="toc-text">集中化审计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索-amp-血缘-查看"><span class="toc-number">1.4.3.</span> <span class="toc-text">搜索 & 血缘(查看)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全-amp-政策-引擎"><span class="toc-number">1.4.4.</span> <span class="toc-text">安全&政策 引擎</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas-的架构"><span class="toc-number">1.5.</span> <span class="toc-text">Atlas 的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要模块"><span class="toc-number">1.5.1.</span> <span class="toc-text">主要模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridges"><span class="toc-number">1.5.2.</span> <span class="toc-text">Bridges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notification"><span class="toc-number">1.5.3.</span> <span class="toc-text">Notification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache-Atlas的应用"><span class="toc-number">1.5.4.</span> <span class="toc-text">Apache Atlas的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Knowledge-Store"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">Apache Atlas – Knowledge Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Data-Life-Management"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">Apache Atlas – Data Life Management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Audit-Store"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">Apache Atlas – Audit Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Policy-Engine"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">Apache Atlas – Policy Engine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Security"><span class="toc-number">1.5.4.5.</span> <span class="toc-text">Apache Atlas – Security</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-System"><span class="toc-number">1.6.</span> <span class="toc-text">Type System</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Types-Overview"><span class="toc-number">1.6.1.</span> <span class="toc-text">Data Types Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Types-Instances-Overview"><span class="toc-number">1.6.2.</span> <span class="toc-text">Types Instances Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Search"><span class="toc-number">1.7.</span> <span class="toc-text">Search</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Falcon-UI"><span class="toc-number">1.7.1.</span> <span class="toc-text">Falcon UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walk-Through-A-Use-Case"><span class="toc-number">1.8.</span> <span class="toc-text">Walk Through A Use Case</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collect-Data"><span class="toc-number">1.8.1.</span> <span class="toc-text">Collect Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-on-Atlas"><span class="toc-number">1.8.2.</span> <span class="toc-text">Search on Atlas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-DB"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">Search based on DB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-Application"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">Search based on Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表格元数据"><span class="toc-number">1.8.2.3.</span> <span class="toc-text">表格元数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#血缘"><span class="toc-number">1.8.2.4.</span> <span class="toc-text">血缘</span></a></li></ol></li></ol></li></ol></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -622,12 +476,89 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -698,4 +629,4 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
