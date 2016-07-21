@@ -177,7 +177,8 @@ cyrus-sasl-2.1.23-15.el6_6.2.x86_64
 cyrus-sasl-gssapi-2.1.23-15.el6_6.2.x86_64
 </code></pre><p> 没有的话，yum install 安装所需的包</p>
 </li>
-<li>检查hive-site.xml配置<br>到 /etc/hive/conf/hive-site.xml 查看配置</li>
+<li><p>检查hive-site.xml配置<br>到 /etc/hive/conf/hive-site.xml 查看配置</p>
+</li>
 </ol>
 <p>其中</p>
 <pre><code>&lt;property&gt;
@@ -188,7 +189,8 @@ cyrus-sasl-gssapi-2.1.23-15.el6_6.2.x86_64
 <p><a href="http://www.cloudera.com/documentation/archive/cdh/4-x/4-5-0/CDH4-Security-Guide/cdh4sg_topic_9_1.html" target="_blank" rel="external">More Info</a></p>
 <h2 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h2><pre><code>import pyhs2
 </code></pre><p>引入pyhs2 lib</p>
-<pre><code>hive_client = HiveClient(db_host=&apos;192.168.100.173&apos;, port=10000, user=&apos;user&apos;, password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+<pre><code>hive_client = HiveClient(db_host=&apos;192.168.100.173&apos;, port=10000, user=&apos;user&apos;, 
+password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
 </code></pre><p>连接到Hive服务器，其中host为hive主机的ip地址，port默认为10000，用户名密码不能为空，authMechanism的值必须与hive-site.xml配置文件中hive.server2.authentication的值相同。</p>
 <pre><code>class HiveClient:
     # create connection to hive server2
@@ -253,7 +255,7 @@ if __name__ == &apos;__main__&apos;:
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Pyh2/">Pyh2</a>
+  <span></span> <a href="/tags/Pyhs2/">Pyhs2</a>
   </div>
 
 </div>
@@ -650,7 +652,9 @@ npm install hexo-generator-sitemap@1 --save
 			
 		
 			
-				<li><a href="/tags/Pyh2/" title="Pyh2">Pyh2<sup>1</sup></a></li>
+				<li><a href="/tags/Pyhs2/" title="Pyhs2">Pyhs2<sup>1</sup></a></li>
+			
+		
 			
 		
 		</ul>
