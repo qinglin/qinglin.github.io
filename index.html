@@ -81,64 +81,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/21/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-21T06:31:19.274Z" itemprop="datePublished"> 发表于 2016-07-21</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2016/07/21/Load-Data-Using-Python-to-Hive/" title="Load Data Using Python to Hive" itemprop="url">Load Data Using Python to Hive</a>
   </h1>
   <p class="article-author">By
@@ -378,10 +320,47 @@ if __name__ == &apos;__main__&apos;:
 - Sqoop Bridge
 - Falcon Bridge
 - Storm Bridge
-</code></pre><h3 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h3><p>Notification被应用于从Hook对Atlas的entity注册，和entity/type交换提醒。这些都由Kafka实现，Atlas启动时也默认启动Kafka Server。<br><img src="http://i.imgur.com/jVm0We9.png" alt=""></p>
+</code></pre><h4 id="Falcon-Bridge"><a href="#Falcon-Bridge" class="headerlink" title="Falcon Bridge"></a>Falcon Bridge</h4><h5 id="Falcon-Model"><a href="#Falcon-Model" class="headerlink" title="Falcon Model"></a>Falcon Model</h5><p>默认的Falcon Modelling是在<code>org.apache.atlas.falcon.model.FalconDataModelGenerator</code>这个类里完成的，它定义了这些类型:</p>
+<pre><code>falcon_cluster(ClassType) - super types [Infrastructure] - attributes [timestamp, colo, owner, tags]
+falcon_feed(ClassType) - super types [DataSet] - attributes [timestamp, stored-in, owner, groups, tags]
+falcon_feed_creation(ClassType) - super types [Process] - attributes [timestamp, stored-in, owner]
+falcon_feed_replication(ClassType) - super types [Process] - attributes [timestamp, owner]
+falcon_process(ClassType) - super types [Process] - attributes [timestamp, runs-on, owner, tags, pipelines, workflow-properties]
+</code></pre><p>在Atlas中这些entity以以下名字存储，可被用于检索/追溯：</p>
+<ul>
+<li>falcon_process - <process name="">@<cluster name=""></cluster></process></li>
+<li>falcon_cluster - <cluster name=""></cluster></li>
+<li>falcon_feed - <feed name="">@<cluster name=""></cluster></feed></li>
+<li>falcon_feed_creation - <feed name=""></feed></li>
+<li>falcon_feed_replication - <feed name=""></feed></li>
+</ul>
+<h5 id="Falcon-Hook"><a href="#Falcon-Hook" class="headerlink" title="Falcon Hook"></a>Falcon Hook</h5><p>Falcon对任意Falcon entity submission设有监听，而Hook就是用于提交notification到notification server，然后Atlas server接收到请求后注册这个Falcon entity。</p>
+<h5 id="Falcon-Hook的配置"><a href="#Falcon-Hook的配置" class="headerlink" title="Falcon Hook的配置"></a>Falcon Hook的配置</h5><ul>
+<li>在’org.apache.atlas.falcon.service.AtlasService’中添加 application.services in <falcon-conf>/startup.properties</falcon-conf></li>
+</ul>
+<p><img src="http://i.imgur.com/GLjySQ3.png" alt=""></p>
+<ul>
+<li>把falcon hook jars链接到falcon classpath - ‘ln -s <atlas-home>/hook/falcon/* <falcon-home>/server/webapp/falcon/WEB-INF/lib/‘</falcon-home></atlas-home></li>
+</ul>
+<p>在160中 atlas home = /usr/hdp/2.3.2.0-2950/atlas, falcon home = /usr/hdp/2.3.2.0-2950/falcon</p>
+<ul>
+<li><p>在<falcon_conf>/falcon-env.sh设置环境变量:</falcon_conf></p>
+<pre><code>export FALCON_SERVER_OPTS=&quot;$FALCON_SERVER_OPTS -Datlas.conf=&lt;atlas-conf&gt;&quot;
+</code></pre></li>
+</ul>
+<p>下面这些属性在<atlas-conf>/atlas-application.properties 中进行配置，它们是控制thread pool和notification细节的一些属性:</atlas-conf></p>
+<ul>
+<li>atlas.hook.falcon.synchronous - boolean, true to run the hook synchronously. default false</li>
+<li>atlas.hook.falcon.numRetries - number of retries for notification failure. default 3</li>
+<li>atlas.hook.falcon.minThreads - core number of threads. default 5</li>
+<li>atlas.hook.falcon.maxThreads - maximum number of threads. default 5</li>
+<li>atlas.hook.falcon.keepAliveTime - keep alive time in msecs. default 10</li>
+<li>atlas.hook.falcon.queueSize - queue size for the threadpool. default 10000</li>
+</ul>
+<h3 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h3><p>Notification被应用于从Hook对Atlas的entity注册，和entity/type交换提醒。这些都由Kafka实现，Atlas启动时也默认启动Kafka Server。<br><img src="http://i.imgur.com/jVm0We9.png" alt=""></p>
 <p>More Info： <a href="http://atlas.incubator.apache.org/Architecture.html" target="_blank" rel="external">Atlas Architecture</a></p>
 <p><img src="http://i.imgur.com/qdL7ViY.png" alt=""></p>
-<h3 id="Apache-Atlas的应用"><a href="#Apache-Atlas的应用" class="headerlink" title="Apache Atlas的应用"></a>Apache Atlas的应用</h3><h4 id="Apache-Atlas-–-Knowledge-Store"><a href="#Apache-Atlas-–-Knowledge-Store" class="headerlink" title="Apache Atlas – Knowledge Store"></a>Apache Atlas – Knowledge Store</h4><p><img src="http://i.imgur.com/FgDCGgX.png" alt=""></p>
+<h2 id="Apache-Atlas的应用"><a href="#Apache-Atlas的应用" class="headerlink" title="Apache Atlas的应用"></a>Apache Atlas的应用</h2><h3 id="Apache-Atlas-–-Knowledge-Store"><a href="#Apache-Atlas-–-Knowledge-Store" class="headerlink" title="Apache Atlas – Knowledge Store"></a>Apache Atlas – Knowledge Store</h3><p><img src="http://i.imgur.com/FgDCGgX.png" alt=""></p>
 <p>知识仓库通过以商业为导向的分类学来分类:</p>
 <ul>
 <li>数据集合 &amp; 对象 Data sets &amp; objects</li>
@@ -394,7 +373,7 @@ if __name__ == &apos;__main__&apos;:
 <ul>
 <li>Titan with Apache HBase</li>
 </ul>
-<h4 id="Apache-Atlas-–-Data-Life-Management"><a href="#Apache-Atlas-–-Data-Life-Management" class="headerlink" title="Apache Atlas – Data Life Management"></a>Apache Atlas – Data Life Management</h4><p><img src="http://i.imgur.com/7pEgcNp.png" alt=""></p>
+<h3 id="Apache-Atlas-–-Data-Life-Management"><a href="#Apache-Atlas-–-Data-Life-Management" class="headerlink" title="Apache Atlas – Data Life Management"></a>Apache Atlas – Data Life Management</h3><p><img src="http://i.imgur.com/7pEgcNp.png" alt=""></p>
 <p>功能：</p>
 <ul>
 <li>跨集群复制</li>
@@ -406,7 +385,7 @@ if __name__ == &apos;__main__&apos;:
 <ul>
 <li>Apache Falcon</li>
 </ul>
-<h4 id="Apache-Atlas-–-Audit-Store"><a href="#Apache-Atlas-–-Audit-Store" class="headerlink" title="Apache Atlas – Audit Store"></a>Apache Atlas – Audit Store</h4><p><img src="http://i.imgur.com/vKubWUr.png" alt=""></p>
+<h3 id="Apache-Atlas-–-Audit-Store"><a href="#Apache-Atlas-–-Audit-Store" class="headerlink" title="Apache Atlas – Audit Store"></a>Apache Atlas – Audit Store</h3><p><img src="http://i.imgur.com/vKubWUr.png" alt=""></p>
 <p>存储所有数据治理相关的Historical Repository</p>
 <ul>
 <li>安全性 Security: 访问权限的给予和拒绝 Access Grant &amp; Deny</li>
@@ -417,7 +396,7 @@ if __name__ == &apos;__main__&apos;:
 <ul>
 <li>YARN ATS, Apache HBase, Apache Hive, Solr,<br>ElasticSearch<br>(Pluggable)</li>
 </ul>
-<h4 id="Apache-Atlas-–-Policy-Engine"><a href="#Apache-Atlas-–-Policy-Engine" class="headerlink" title="Apache Atlas – Policy Engine"></a>Apache Atlas – Policy Engine</h4><p><img src="http://i.imgur.com/uuZaSIL.png" alt=""><br>关于数据集合的合并以及时间的（data asset combinations<br>and time）政策条例</p>
+<h3 id="Apache-Atlas-–-Policy-Engine"><a href="#Apache-Atlas-–-Policy-Engine" class="headerlink" title="Apache Atlas – Policy Engine"></a>Apache Atlas – Policy Engine</h3><p><img src="http://i.imgur.com/uuZaSIL.png" alt=""><br>关于数据集合的合并以及时间的（data asset combinations<br>and time）政策条例</p>
 <ul>
 <li>基于元数据的</li>
 <li>基于地理位置的条例 Geo based rules</li>
@@ -429,8 +408,72 @@ if __name__ == &apos;__main__&apos;:
 <ul>
 <li>Ranger</li>
 </ul>
-<h4 id="Apache-Atlas-–-Security"><a href="#Apache-Atlas-–-Security" class="headerlink" title="Apache Atlas – Security"></a>Apache Atlas – Security</h4><p><img src="http://i.imgur.com/hhqnImj.png" alt=""></p>
+<h3 id="Apache-Atlas-–-Security"><a href="#Apache-Atlas-–-Security" class="headerlink" title="Apache Atlas – Security"></a>Apache Atlas – Security</h3><p><img src="http://i.imgur.com/hhqnImj.png" alt=""></p>
 <p>建立基于数据分类的全球安全条例(global security policies)</p>
+<h4 id="Atlas的三种安全特征"><a href="#Atlas的三种安全特征" class="headerlink" title="Atlas的三种安全特征"></a>Atlas的三种安全特征</h4><p>有以下三种增强Apache Atlas安全性的特征：</p>
+<h5 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h5><p>Atlas支持SSL的单向(服务器)和双向（客户端、服务器)授权。下面的属性可以用来配置SSL（也可以通过atlas-application.properties file）来配置</p>
+<ul>
+<li><p><code>atlas.enableTLS</code> (false|true) [默认为false] - 启动/关闭 SSL listener</p>
+</li>
+<li><p><code>keystore.file</code> - keystore file的路径，这个file包含服务器证书</p>
+</li>
+<li><p><code>truststore.file</code> - truststore file的路径，这个文件包含其他信任entities的证书(例如，当双向（client-server）的SSL被启动时，客户端的证书)。大部分时候，这个值和keysotre.file的值是一样的。</p>
+</li>
+<li><p><code>client.auth.enabled</code> (false|true) [默认为false] - 启动/关闭客户端认证。 若启动，客户端会在transport session key生成的时候经过服务器的认证(譬如在双向SSL被开启的时候)。</p>
+</li>
+<li><p><code>cert.stores.credential.provider.path</code> - Credential Provider store file的路径，这个文件存有keystore, truststore, 和服务器证书的密码。</p>
+</li>
+</ul>
+<h5 id="Service-Authentication"><a href="#Service-Authentication" class="headerlink" title="Service Authentication"></a>Service Authentication</h5><p>Atlas平台有两种安全认证方式，一种是默认的在不安全环境下直接由OS认证用户，而后登录系统；而在启用kerberos的安全环境下，最好的方式是配置一个keytab和principal从而让平台在KDC上注册，这样也让atlas可以与其他安全的集群服务交互（如HDFS）。</p>
+<p>需要配置的service authentication属性有:</p>
+<p><code>atlas.authentication.method</code> (simple|kerberos) [default: simple] </p>
+<p><code>atlas.authentication.keytab</code> - keytab file的路径</p>
+<p><code>atlas.authentication.principal</code> - 注册到KDC需要用的principal。通常以”user/host@realm”格式</p>
+<h5 id="SPNEGO-based-HTTP-Authentication"><a href="#SPNEGO-based-HTTP-Authentication" class="headerlink" title="SPNEGO-based HTTP Authentication"></a>SPNEGO-based HTTP Authentication</h5><p>HTTP连接到Atlas平台的安全性由SPNEGO保障，现阶段有两种认证机制：</p>
+<ul>
+<li>simple - 认证仅需要一个用户名</li>
+<li>kerberos - 在服务器上认证需要首先在KDC上注册</li>
+</ul>
+<p>配置SPNEGO support的需要的属性有：</p>
+<p><code>atlas.http.authentication.enabled</code> (true|false) [默认为 false] - 是否启用HTTP认证</p>
+<p><code>atlas.http.authentication.type</code> (simple|kerberos) [默认为simple] - 认证方式</p>
+<p><code>atlas.http.authentication.kerberos.principal</code> - 网络应用Kerberos pricipal的名字。这个Kerberos principal名字需要以 “HTTP/…”开始，譬如: “HTTP/localhost@LOCALHOST”。没有默认值。</p>
+<p><code>atlas.http.authentication.kerberos.keytab</code> - keytab file的路径，这个文件里包括kerberos principal的密码。</p>
+<p><code>atlas.rest.address</code> - <http https="">://<atlas-fqdn>:<atlas port=""></atlas></atlas-fqdn></http></p>
+<h2 id="Apache-Atlas配置-Application-Properties"><a href="#Apache-Atlas配置-Application-Properties" class="headerlink" title="Apache Atlas配置 - Application Properties"></a>Apache Atlas配置 - Application Properties</h2><p>Application Properties的文件夹位于{atlas-home}/atlas/conf</p>
+<p><img src="http://i.imgur.com/zxhYfLR.png" alt=""></p>
+<h3 id="Graph配置"><a href="#Graph配置" class="headerlink" title="Graph配置"></a>Graph配置</h3><h4 id="Graph-DB配置"><a href="#Graph-DB配置" class="headerlink" title="Graph DB配置"></a>Graph DB配置</h4><pre><code>atlas.graph.storage.backend=berkeleyje
+atlas.graph.storage.directory=data/berkley
+</code></pre><h4 id="Graph-persistence-engine-Hbase"><a href="#Graph-persistence-engine-Hbase" class="headerlink" title="Graph persistence engine - Hbase"></a>Graph persistence engine - Hbase</h4><pre><code>atlas.graph.storage.backend=hbase
+#For standalone mode , specify localhost
+#for distributed mode, specify zookeeper quorum here - For more information refer http://s3.thinkaurelius.com/docs/titan/current/hbase.html#_remote_server_mode_2
+atlas.graph.storage.hostname=&lt;ZooKeeper Quorum&gt;
+</code></pre><h4 id="Graph-Search-Index"><a href="#Graph-Search-Index" class="headerlink" title="Graph Search Index"></a>Graph Search Index</h4><p>为Titan Graph数据库配置一个index引擎</p>
+<pre><code>atlas.graph.index.search.backend=elasticsearch
+atlas.graph.index.search.directory=data/es
+atlas.graph.index.search.elasticsearch.client-only=false
+atlas.graph.index.search.elasticsearch.local-mode=true
+atlas.graph.index.search.elasticsearch.create.sleep=2000
+</code></pre><h4 id="Lineage配置"><a href="#Lineage配置" class="headerlink" title="Lineage配置"></a>Lineage配置</h4><pre><code>atlas.lineage.hive.table.type.name=DataSet
+atlas.lineage.hive.process.type.name=Process
+atlas.lineage.hive.process.inputs.name=inputs
+atlas.lineage.hive.process.outputs.name=outputs
+
+## Schema
+atlas.lineage.hive.table.schema.query=hive_table where name=?, columns
+</code></pre><h4 id="Notification配置"><a href="#Notification配置" class="headerlink" title="Notification配置"></a>Notification配置</h4><p>Kafka配置</p>
+<pre><code>atlas.notification.embedded=true
+atlas.kafka.data=${sys:atlas.home}/data/kafka
+atlas.kafka.zookeeper.connect=localhost:9026
+atlas.kafka.bootstrap.servers=localhost:9027
+atlas.kafka.zookeeper.session.timeout.ms=400
+atlas.kafka.zookeeper.sync.time.ms=20
+atlas.kafka.auto.commit.interval.ms=1000
+atlas.kafka.hook.group.id=atlas
+</code></pre><h4 id="Client配置"><a href="#Client配置" class="headerlink" title="Client配置"></a>Client配置</h4><pre><code>atlas.client.readTimeoutMSecs=60000
+atlas.client.connectTimeoutMSecs=60000
+atlas.rest.address=&lt;http/https&gt;://&lt;atlas-fqdn&gt;:&lt;atlas port&gt; - default http://localhost:21000
+</code></pre><p>More Info: <a href="http://atlas.incubator.apache.org/Configuration.html" target="_blank" rel="external">Atlas配置</a></p>
 <h2 id="Type-System"><a href="#Type-System" class="headerlink" title="Type System"></a>Type System</h2><h3 id="Data-Types-Overview"><a href="#Data-Types-Overview" class="headerlink" title="Data Types Overview"></a>Data Types Overview</h3><p><img src="http://i.imgur.com/7LWI5Dx.png" alt=""></p>
 <h3 id="Types-Instances-Overview"><a href="#Types-Instances-Overview" class="headerlink" title="Types Instances Overview"></a>Types Instances Overview</h3><p><img src="http://i.imgur.com/raYQMwv.png" alt=""></p>
 <h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><p>有两种在Atlas中搜索元数据的方法:</p>
