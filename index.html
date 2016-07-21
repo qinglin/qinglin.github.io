@@ -139,6 +139,148 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/07/21/Load-Data-Using-Python-to-Hive/" title="Load Data Using Python to Hive" itemprop="url">Load Data Using Python to Hive</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-21T06:29:20.000Z" itemprop="datePublished"> 发表于 2016-07-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
+<ul>
+<li><p>从<a href="https://pypi.python.org/pypi/ez_setup" target="_blank" rel="external">https://pypi.python.org/pypi/ez_setup</a> 下载ez_setup的tar包</p>
+<pre><code>- tar -vzxf ez_setup-**.tar.gz
+- python ez_setup.py
+- easy_install pip
+- yum install gcc-c++
+- yum install cyrus-sasl-devel.x86_64
+- yum install python-devel.x86_64
+- pip install pyhs2
+</code></pre></li>
+</ul>
+<h2 id="解决No-Mechanism-Available问题"><a href="#解决No-Mechanism-Available问题" class="headerlink" title="解决No Mechanism Available问题"></a>解决No Mechanism Available问题</h2><pre><code>thrift.transport.TTransport.TTransportException: Could not start SASL: Error in sasl_client_start (-4) SASL(-4): no mechanism available: No worthy mechs found
+</code></pre><ol>
+<li><p>检查是否安装所有配置所需要的包</p>
+<pre><code>rpm -qa | grep cyrus
+</code></pre><p> 至少需要有以下包</p>
+<pre><code>cyrus-sasl-lib-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-plain-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-md5-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-devel-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-gssapi-2.1.23-15.el6_6.2.x86_64
+</code></pre><p> 没有的话，yum install 安装所需的包</p>
+</li>
+<li>检查hive-site.xml配置<br>到 /etc/hive/conf/hive-site.xml 查看配置</li>
+</ol>
+<p>其中</p>
+<pre><code>&lt;property&gt;
+  &lt;name&gt;hive.server2.authentication&lt;/name&gt;
+  &lt;value&gt;KERBEROS&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>可以把Value值改成NOSASL/PLAIN,etc</p>
+<p><a href="http://www.cloudera.com/documentation/archive/cdh/4-x/4-5-0/CDH4-Security-Guide/cdh4sg_topic_9_1.html" target="_blank" rel="external">More Info</a></p>
+<h2 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h2><pre><code>import pyhs2
+</code></pre><p>引入pyhs2 lib</p>
+<pre><code>hive_client = HiveClient(db_host=&apos;192.168.100.173&apos;, port=10000, user=&apos;user&apos;, password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+</code></pre><p>连接到Hive服务器，其中host为hive主机的ip地址，port默认为10000，用户名密码不能为空，authMechanism的值必须与hive-site.xml配置文件中hive.server2.authentication的值相同。</p>
+<pre><code>class HiveClient:
+    # create connection to hive server2
+    def __init__(self, db_host, user, password, database, port=10000, authMechanism=&quot;PLAIN&quot;):
+        self.conn = pyhs2.connect(host=db_host,
+                                  port=port,
+                                  authMechanism=authMechanism,
+                                  user=user,
+                                  password=password,
+                                  database=database,
+                                  )
+
+    def query(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+            return cursor.fetch()
+
+    def loaddata(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+
+    def close(self):
+        self.conn.close()
+
+
+
+def main():
+    # 注意authMechanism初始的时候是PLAIN，最好的解决方案是加上认证模块
+    hive_client = HiveClient(db_host=&apos;192.168.100.171&apos;, port=10000, user=&apos;root&apos;, password=&apos;Qianxin123&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+    print &quot;Connect to Hive!&quot;
+    # 测试select语句
+
+    sql = &apos;select * from country1;&apos;
+    print sql
+    try:
+        fetch = hive_client.query(sql)
+        for i in fetch:
+            print i
+        sql = &quot;insert into country1 values(1,/&quot;hello/&quot;)&quot;
+        hive_client.query(sql)
+        sql = &apos;select * from country1&apos;
+        fetch = hive_client.query(sql)
+        for i in fetch:
+            print i
+    except Exception as e:
+        print e
+    hive_client.close()
+
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Pyh2/">Pyh2</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/07/18/Research-about-Apache-Atlas-1/" title="关于数据治理工具Apache Atlas的研究" itemprop="url">关于数据治理工具Apache Atlas的研究</a>
   </h1>
   <p class="article-author">By
@@ -505,6 +647,10 @@ npm install hexo-generator-sitemap@1 --save
 		
 			
 				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pyh2/" title="Pyh2">Pyh2<sup>1</sup></a></li>
 			
 		
 		</ul>
