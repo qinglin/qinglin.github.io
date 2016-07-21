@@ -164,7 +164,10 @@
 - pip install pyhs2
 </code></pre></li>
 </ul>
-<h2 id="解决No-Mechanism-Available问题"><a href="#解决No-Mechanism-Available问题" class="headerlink" title="解决No Mechanism Available问题"></a>解决No Mechanism Available问题</h2><pre><code>thrift.transport.TTransport.TTransportException: Could not start SASL: Error in sasl_client_start (-4) SASL(-4): no mechanism available: No worthy mechs found
+<h2 id="解决No-Mechanism-Available问题"><a href="#解决No-Mechanism-Available问题" class="headerlink" title="解决No Mechanism Available问题"></a>解决No Mechanism Available问题</h2><pre><code>thrift.transport.TTransport.TTransportException: 
+Could not start SASL: Error in sasl_client_start 
+(-4) SASL(-4): no mechanism available: 
+No worthy mechs found
 </code></pre><ol>
 <li><p>检查是否安装所有配置所需要的包</p>
 <pre><code>rpm -qa | grep cyrus
@@ -219,7 +222,11 @@ password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos
 
 def main():
     # 注意authMechanism初始的时候是PLAIN，最好的解决方案是加上认证模块
-    hive_client = HiveClient(db_host=&apos;192.168.100.171&apos;, port=10000, user=&apos;root&apos;, password=&apos;Qianxin123&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+    hive_client = HiveClient(db_host=&apos;192.168.100.171&apos;, 
+    port=10000, user=&apos;root&apos;, 
+    password=&apos;Qianxin123&apos;, 
+    database=&apos;default&apos;, 
+    authMechanism=&apos;PLAIN&apos;)
     print &quot;Connect to Hive!&quot;
     # 测试select语句
 
