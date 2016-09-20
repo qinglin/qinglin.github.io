@@ -1,0 +1,5 @@
+Intel8x0
+
+Global control        : 0x00000000
+Global status         : 0x00000100
+AC'97 codecs ready    : primary

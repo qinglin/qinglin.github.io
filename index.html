@@ -81,6 +81,96 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/20/Create_Gradle_Project_Under_Eclipse/" title="Create_Gradle_Project_Under_Eclipse" itemprop="url">Create_Gradle_Project_Under_Eclipse</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-20T10:16:43.000Z" itemprop="datePublished"> 发表于 2016-09-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="使用Gradle在Eclipse中构建Spring项目"><a href="#使用Gradle在Eclipse中构建Spring项目" class="headerlink" title="使用Gradle在Eclipse中构建Spring项目"></a>使用Gradle在Eclipse中构建Spring项目</h2><h3 id="在Windows下下载及安装Gradle"><a href="#在Windows下下载及安装Gradle" class="headerlink" title="在Windows下下载及安装Gradle"></a>在Windows下下载及安装Gradle</h3><ol>
+<li><p>Gradle下载地址</p>
+<pre><code>http://www.gradle.org/downloads
+</code></pre></li>
+<li>在以上下载地址下载Gradle的binary安装包</li>
+<li>解压下载的文件，并把解压后目录中的bin目录加到环境变量Path中</li>
+<li><p>在cmd下测试Gradle是否安装成功，输入指令</p>
+<pre><code>gradle
+</code></pre><p> 如安装成功结果应该显示为</p>
+</li>
+</ol>
+<p><img src="http://i.imgur.com/pixtjpC.png" alt="">    </p>
+<h3 id="在Eclipse安装Gradle插件"><a href="#在Eclipse安装Gradle插件" class="headerlink" title="在Eclipse安装Gradle插件"></a>在Eclipse安装Gradle插件</h3><ol>
+<li><p>官方的Eclipse Gradle插件叫buildship，具体可见</p>
+<pre><code>https://github.com/eclipse/buildship/blob/master/docs/user/Installation.md
+</code></pre></li>
+<li><p>在eclipse中打开help-&gt;”Eclipse Marketplace”，在搜索栏中输入”buildship”</p>
+</li>
+</ol>
+<p><img src="http://i.imgur.com/j83hYUU.png" alt=""></p>
+<ol>
+<li>点击install,等待安装完成，按照提示重启eclipse即可</li>
+<li>安装成功后，即可创建或导入Gradle项目</li>
+</ol>
+<p><img src="http://i.imgur.com/ZQFxxFr.png" alt=""></p>
+<h3 id="在Eclipse导入gradle项目"><a href="#在Eclipse导入gradle项目" class="headerlink" title="在Eclipse导入gradle项目"></a>在Eclipse导入gradle项目</h3><ol>
+<li><p>打开build.gradle文件，在第一行添加以下代码</p>
+<pre><code>apply plugin &apos;eclipse&apos;
+</code></pre></li>
+<li><p>在项目所在目录下运行命令</p>
+<pre><code>gradlew.bat eclipse
+</code></pre></li>
+<li><p>在eclipse下导入该gradle项目</p>
+</li>
+</ol>
+<p><img src="http://i.imgur.com/DE68MRC.png" alt=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Gradle/">Gradle</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/08/01/Install_mvn/" title="Linux下安装mvn" itemprop="url">Linux下安装mvn</a>
   </h1>
   <p class="article-author">By
@@ -787,7 +877,7 @@ npm install hexo-generator-sitemap@1 --save
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux-mvn/" title="Linux mvn">Linux mvn<sup>1</sup></a></li>
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
 			
 		
 			
@@ -795,11 +885,15 @@ npm install hexo-generator-sitemap@1 --save
 			
 		
 			
-				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
+				<li><a href="/tags/Linux-mvn/" title="Linux mvn">Linux mvn<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Pyhs2/" title="Pyhs2">Pyhs2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
 			
 		
 		</ul>

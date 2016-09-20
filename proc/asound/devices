@@ -1,0 +1,6 @@
+  2:        : timer
+  3:        : sequencer
+  4: [ 0]   : control
+  5: [ 0- 0]: digital audio playback
+  6: [ 0- 0]: digital audio capture
+  7: [ 0- 1]: digital audio capture
