@@ -1,0 +1,584 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Bigwhite&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Qinglin, Xia">
+    
+
+    
+    <meta name="description" content="Git 命令大全设定你的Git 设定作者的信息 git config --global user.name &amp;quot;jimmy kuo&amp;quot; git config --global user.email &amp;quot;jimmy@gogojimmy.net&amp;quot;    查看git的设定 git config -- list   建立自己的Git Repository 自己建立一个新的">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bigwhite's Blog">
+<meta property="og:url" content="https:qinglin.github.io/2017/04/14/Learning_Git/index.html">
+<meta property="og:site_name" content="Bigwhite's Blog">
+<meta property="og:description" content="Git 命令大全设定你的Git 设定作者的信息 git config --global user.name &amp;quot;jimmy kuo&amp;quot; git config --global user.email &amp;quot;jimmy@gogojimmy.net&amp;quot;    查看git的设定 git config -- list   建立自己的Git Repository 自己建立一个新的">
+<meta property="og:image" content="http://i.imgur.com/Ll6xudL.png">
+<meta property="og:image" content="http://i.imgur.com/3RgN4PG.png">
+<meta property="og:image" content="http://i.imgur.com/i6B0lJY.png">
+<meta property="og:updated_time" content="2017-04-14T01:34:01.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bigwhite's Blog">
+<meta name="twitter:description" content="Git 命令大全设定你的Git 设定作者的信息 git config --global user.name &amp;quot;jimmy kuo&amp;quot; git config --global user.email &amp;quot;jimmy@gogojimmy.net&amp;quot;    查看git的设定 git config -- list   建立自己的Git Repository 自己建立一个新的">
+<meta name="twitter:image" content="http://i.imgur.com/Ll6xudL.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Bigwhite&#39;s Blog" title="Bigwhite&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bigwhite&#39;s Blog">Bigwhite&#39;s Blog</a></h1>
+				<h2 class="blog-motto">This is where I write things about coding and my life</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:https:qinglin.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/14/Learning_Git/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-14T01:34:01.329Z" itemprop="datePublished"> 发表于 2017-04-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-命令大全"><span class="toc-number">1.</span> <span class="toc-text">Git 命令大全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">1.2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">1.3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">1.4.</span> <span class="toc-text">Git流程整理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Branch"><span class="toc-number">2.</span> <span class="toc-text">Git Branch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">2.1.</span> <span class="toc-text">合并branch到master branch</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number">3.</span> <span class="toc-text">Confict: 冲突处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">3.1.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">3.2.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">3.3.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Git-命令大全"><a href="#Git-命令大全" class="headerlink" title="Git 命令大全"></a>Git 命令大全</h1><h2 id="设定你的Git"><a href="#设定你的Git" class="headerlink" title="设定你的Git"></a>设定你的Git</h2><ul>
+<li><p>设定作者的信息</p>
+<pre><code>git config --global user.name &quot;jimmy kuo&quot;
+git config --global user.email &quot;jimmy@gogojimmy.net&quot;
+</code></pre></li>
+</ul>
+<ul>
+<li><p>查看git的设定</p>
+<pre><code>git config -- list
+</code></pre></li>
+</ul>
+<h2 id="建立自己的Git-Repository"><a href="#建立自己的Git-Repository" class="headerlink" title="建立自己的Git Repository"></a>建立自己的Git Repository</h2><ul>
+<li><p>自己建立一个新的Repository</p>
+<pre><code>git init
+</code></pre></li>
+<li><p>Clone别人的Repository</p>
+<pre><code>git clone
+</code></pre></li>
+</ul>
+<h2 id="Git的基本功-status-add-commit-log-gitignore"><a href="#Git的基本功-status-add-commit-log-gitignore" class="headerlink" title="Git的基本功(status, add, commit, log, .gitignore)"></a>Git的基本功(status, add, commit, log, .gitignore)</h2><pre><code>git status 
+</code></pre><ul>
+<li><p>Untracked files（未被追踪的files，新增/修改的files还没被提交到git repository上的）</p>
+<pre><code>git add *
+</code></pre></li>
+<li><p>提交后状态变为 Changes to be committed</p>
+<pre><code>changes to be commited
+</code></pre></li>
+<li><p>committed之后的状态叫做stage，修改过但还没使用git add的file叫做unstage</p>
+</li>
+<li><p>git log</p>
+<pre><code>查看过去commit的记录
+</code></pre><p><img src="http://i.imgur.com/Ll6xudL.png" alt=""></p>
+</li>
+<li><p>git log –stat</p>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/3RgN4PG.png" alt=""></p>
+<ul>
+<li>git log -p</li>
+</ul>
+<p>更详细的变更内容，具体到代码</p>
+<p><img src="http://i.imgur.com/i6B0lJY.png" alt=""></p>
+<h2 id="Git流程整理"><a href="#Git流程整理" class="headerlink" title="Git流程整理"></a>Git流程整理</h2><p>修改file -&gt; 加入stage(git add) -&gt; 提交（git commit）-&gt; 继续修改其他file</p>
+<h1 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h1><ul>
+<li><p>查看当前branch</p>
+<pre><code>git branch
+</code></pre></li>
+<li><p>开一个新的branch</p>
+</li>
+</ul>
+<pre><code>git branch cat
+开一个新的branch名字叫做cat
+</code></pre><ul>
+<li><p>切换到别的branch</p>
+<pre><code>git checkout cat
+</code></pre></li>
+</ul>
+<h2 id="合并branch到master-branch"><a href="#合并branch到master-branch" class="headerlink" title="合并branch到master branch"></a>合并branch到master branch</h2><pre><code>git rebase
+</code></pre><p>基于master branch目前最后一次的commit内容再往后把你在cat branch上commit的内容加上去</p>
+<ul>
+<li><p>查看master branch和其他branch的差异</p>
+<pre><code>git diff
+</code></pre></li>
+<li><p>把cat branch上开发的东西合并到master上</p>
+<pre><code>git merge cat
+</code></pre></li>
+</ul>
+<h1 id="Confict-冲突处理"><a href="#Confict-冲突处理" class="headerlink" title="Confict: 冲突处理"></a>Confict: 冲突处理</h1><p>通常在merge或是rebase的过程中产生了confict，这时候git会停下来请你去处理</p>
+<ol>
+<li>将发生confict的档案打开，处理内容(删除&lt;&lt;&lt;.===,&gt;&gt;&gt;)</li>
+<li>使用git add 将处理好的file加入stage</li>
+<li>反复1~2直到所有confict处理完毕</li>
+<li>git commit提交合并信息</li>
+<li>完成</li>
+</ol>
+<h2 id="取消上一次的操作"><a href="#取消上一次的操作" class="headerlink" title="取消上一次的操作"></a>取消上一次的操作</h2><ul>
+<li><p>取消刚刚的merge动作</p>
+<pre><code>git reset --hard ORIG_HEAD
+</code></pre></li>
+</ul>
+<h2 id="取消已暂存的file"><a href="#取消已暂存的file" class="headerlink" title="取消已暂存的file"></a>取消已暂存的file</h2><ul>
+<li><p>取消刚刚add到stage中还没修改完的file</p>
+<pre><code>git reset HEAD file
+</code></pre></li>
+</ul>
+<ul>
+<li><p>取消刚刚修改过的file</p>
+<pre><code>git checkout -- file
+</code></pre></li>
+</ul>
+<p>回复前修改的档案要记得备份</p>
+<ul>
+<li><p>修改上一次的commit讯息</p>
+<pre><code>git commit --amend
+</code></pre></li>
+<li><p>强制恢复到上一次commit的版本</p>
+<pre><code>git reset --hard HEAD
+</code></pre></li>
+</ul>
+<p>恢复到上一次commit的版本，HEAD^指目前版本的上一个版本，Head~2是再上一个</p>
+<ul>
+<li><p>git reset, hard 與 soft 的差異</p>
+<p>  你可能會在這邊感到疑惑，在使用 git reset 的時候都會看到一個 soft 或是 hard 的參數，這代表什麼樣的意義？基本上在使用 git reset 的時候，都會把目前狀態回復到你想回復的版本，但若是不加參數的情況，會把你做過的修改仍然保留，但是，若是加上 —soft 參數，則會把做過的修改加入 stage ，若是加上 hard 參數的話則是把做過的修改完全刪除，回到那個版本原本的樣子。</p>
+</li>
+</ul>
+<h2 id="暂存操作-Stash"><a href="#暂存操作-Stash" class="headerlink" title="暂存操作(Stash)"></a>暂存操作(Stash)</h2><ul>
+<li><p>将目前所做的修改都暂存起来</p>
+<pre><code>git stash
+</code></pre></li>
+<li><p>取出最新一次的暂存</p>
+<pre><code>git stash appl
+</code></pre></li>
+<li><p>取出最新一次的暂存并将他从暂存清单中移除</p>
+<pre><code>git stash pop
+</code></pre></li>
+<li><p>显示出所有的暂存清单</p>
+<pre><code>git stash list
+</code></pre></li>
+<li><p>清楚所有的暂存</p>
+<pre><code>git stash clear
+</code></pre></li>
+</ul>
+<p><a href="http://blog.gogojimmy.net/2012/02/29/git-scenario/" target="_blank" rel="external">Git情景剧：在什么情况下该使用什么命令</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https:qinglin.github.io/2017/04/14/Learning_Git/" data-title="Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/14/安装atlas/" title="">
+  <strong>上一篇：</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/14/Install Lib in Pycharm/"  title="">
+ <strong>下一篇：</strong><br/> 
+ <span>(no title)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-命令大全"><span class="toc-number">1.</span> <span class="toc-text">Git 命令大全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">1.2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">1.3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">1.4.</span> <span class="toc-text">Git流程整理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Branch"><span class="toc-number">2.</span> <span class="toc-text">Git Branch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">2.1.</span> <span class="toc-text">合并branch到master branch</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number">3.</span> <span class="toc-text">Confict: 冲突处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">3.1.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">3.2.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">3.3.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Github-Hexo-博客，Linux/" title="Github, Hexo, 博客，Linux">Github, Hexo, 博客，Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Qinglin, Xia">Qinglin, Xia</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,546 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Bigwhite&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Qinglin, Xia">
+    
+
+    
+    <meta name="description" content="Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas git checkout altas-0.7-incubating  切换到atlas文件夹 cd atlas  编译atlas export MAVEN_OPTS=&amp;quot;-Xmx15">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bigwhite's Blog">
+<meta property="og:url" content="https:qinglin.github.io/2017/04/14/安装atlas/index.html">
+<meta property="og:site_name" content="Bigwhite's Blog">
+<meta property="og:description" content="Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas git checkout altas-0.7-incubating  切换到atlas文件夹 cd atlas  编译atlas export MAVEN_OPTS=&amp;quot;-Xmx15">
+<meta property="og:image" content="http://i.imgur.com/8PV1nse.png">
+<meta property="og:image" content="http://i.imgur.com/cCZkhAV.png">
+<meta property="og:image" content="http://i.imgur.com/rY5yDmV.png">
+<meta property="og:image" content="http://i.imgur.com/2SIOANs.png">
+<meta property="og:image" content="http://i.imgur.com/4p9O632.png">
+<meta property="og:updated_time" content="2017-04-14T01:29:53.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bigwhite's Blog">
+<meta name="twitter:description" content="Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas git checkout altas-0.7-incubating  切换到atlas文件夹 cd atlas  编译atlas export MAVEN_OPTS=&amp;quot;-Xmx15">
+<meta name="twitter:image" content="http://i.imgur.com/8PV1nse.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Bigwhite&#39;s Blog" title="Bigwhite&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bigwhite&#39;s Blog">Bigwhite&#39;s Blog</a></h1>
+				<h2 class="blog-motto">This is where I write things about coding and my life</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:https:qinglin.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/14/安装atlas/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-14T01:29:53.566Z" itemprop="datePublished"> 发表于 2017-04-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Atlas的安装和编译"><span class="toc-number">1.</span> <span class="toc-text">Atlas的安装和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译Atlas"><span class="toc-number">1.1.</span> <span class="toc-text">编译Atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas编译要求"><span class="toc-number">1.2.</span> <span class="toc-text">Atlas编译要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas安装与配置"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动atlas"><span class="toc-number">1.4.</span> <span class="toc-text">启动atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误排查"><span class="toc-number">1.5.</span> <span class="toc-text">错误排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka启动失败"><span class="toc-number">1.5.1.</span> <span class="toc-text">Kafka启动失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI-Keep-Loading"><span class="toc-number">1.5.2.</span> <span class="toc-text">UI Keep Loading</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Atlas的安装和编译"><a href="#Atlas的安装和编译" class="headerlink" title="Atlas的安装和编译"></a>Atlas的安装和编译</h1><h2 id="编译Atlas"><a href="#编译Atlas" class="headerlink" title="编译Atlas"></a>编译Atlas</h2><ol>
+<li><p>从git下载源码库</p>
+<pre><code>git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas
+git checkout altas-0.7-incubating
+</code></pre></li>
+<li><p>切换到atlas文件夹</p>
+<pre><code>cd atlas
+</code></pre></li>
+<li><p>编译atlas</p>
+<pre><code>export MAVEN_OPTS=&quot;-Xmx1536m -XX:MaxPermSize=512m&quot; &amp;&amp; mvn clean install -DskipTests -Drat.numUnapprovedLicenses=100
+</code></pre></li>
+<li><p>skip Licenses</p>
+<pre><code>http://stackoverflow.com/questions/30181154/skipping-some-license-tests-in-maven
+
+-Drat.numUnapprovedLicenses=100
+</code></pre></li>
+<li><p>Skip test cases</p>
+<pre><code>mvn install 
+</code></pre></li>
+</ol>
+<h2 id="Atlas编译要求"><a href="#Atlas编译要求" class="headerlink" title="Atlas编译要求"></a>Atlas编译要求</h2><ol>
+<li><a href="https://qinglin.github.io/2016/08/01/Install_mvn/" target="_blank" rel="external">maven版本到3.1.0以上</a></li>
+</ol>
+<h2 id="Atlas安装与配置"><a href="#Atlas安装与配置" class="headerlink" title="Atlas安装与配置"></a>Atlas安装与配置</h2><ol>
+<li>mvn clean package -Pdist -DskipTests</li>
+<li><p>编译完之后解压生成的tar包 </p>
+<pre><code>tar -xzvf apache-atlas-${project.version}-bin.tar.gz
+cd atlas-${project.version}
+</code></pre></li>
+<li><p>配置atlas参数</p>
+<p> 所有atlas参数配置都在conf文件夹下，这里主要修改atlas-application.properties的配置</p>
+<p> 配置kafka相关参数</p>
+<pre><code>atlas.notification.embedded=false
+atlas.kafka.data=${sys:atlas.home}/data/kafka
+atlas.kafka.zookeeper.connect=localhost:2181
+atlas.kafka.bootstrap.servers=fsdn1:6667
+</code></pre><p> 配置Zookeeper相关参数</p>
+<pre><code>atlas.audit.hbase.zookeeper.quorum={zookeeeper_host}:2181
+</code></pre></li>
+</ol>
+<h2 id="启动atlas"><a href="#启动atlas" class="headerlink" title="启动atlas"></a>启动atlas</h2><pre><code>bin/atlas_start.py 
+</code></pre><p>这样可在浏览器中输入：<a href="http://localhost:21000，就可以打开atlas的web页面" target="_blank" rel="external">http://localhost:21000，就可以打开atlas的web页面</a></p>
+<h2 id="错误排查"><a href="#错误排查" class="headerlink" title="错误排查"></a>错误排查</h2><h3 id="Kafka启动失败"><a href="#Kafka启动失败" class="headerlink" title="Kafka启动失败"></a>Kafka启动失败</h3><p><img src="http://i.imgur.com/8PV1nse.png" alt=""></p>
+<p><img src="http://i.imgur.com/cCZkhAV.png" alt=""></p>
+<p><img src="http://i.imgur.com/rY5yDmV.png" alt=""></p>
+<p><img src="http://i.imgur.com/2SIOANs.png" alt=""></p>
+<pre><code>论坛提问： https://community.hortonworks.com/questions/67795/fail-to-start-kafka-when-starting-the-atlas.html
+
+关闭Zookeeper，报错Connection Refused
+开启Zookeeper，报错cannot assign requested address
+</code></pre><p>Resolution:<br>修改Kafka相关参数：</p>
+<pre><code>atlas.notification.embedded=false
+</code></pre><p><a href="http://dev.hortonworks.com.s3.amazonaws.com/HDPDocuments/Ambari-Trunk/bk_ambari_reference_guide/content/ch_integrating_atlas.html_" target="_blank" rel="external">参考资料 – 集成atlas与kafka</a></p>
+<h3 id="UI-Keep-Loading"><a href="#UI-Keep-Loading" class="headerlink" title="UI Keep Loading"></a>UI Keep Loading</h3><p>如图：</p>
+<p><img src="http://i.imgur.com/4p9O632.png" alt=""></p>
+<p><a href="https://community.hortonworks.com/questions/67816/atlas-ui-keep-loading-after-logged-in.html" target="_blank" rel="external">论坛提问贴 – 多亏了这个帖子，找到了解决方案</a></p>
+<p>Resolution： </p>
+<p>根据论坛的回复，有两个解决方案，我用了第一种，就是下载hdp2.5然后把atlas web相关的文件夹覆盖掉0.7的文件夹</p>
+<ol>
+<li><p>I have replaced web folder from Sandbox(HDP 2.5 with Atlas 0.7) and it worked fine.</p>
+<pre><code>下载HDP2.5，找到usr/hdp/2.5.0.0-1245/atlas文件夹，将其中的web相关文件夹copy and replace原本atlas的对应文件夹
+![](http://i.imgur.com/CEvYjx5.png)
+</code></pre></li>
+<li><p>Download the patch and git apply it – <a href="https://issues.apache.org/jira/browse/ATLAS-1199" target="_blank" rel="external">ATLAS-1199-PATCH</a></p>
+<p> Git Apply Patch Failed (<a href="http://www.fwolf.com/blog/post/448" target="_blank" rel="external">http://www.fwolf.com/blog/post/448</a>) </p>
+<pre><code>$ git apply --reject 0001-BUG-Sybase.patch
+Checking patch source.php...
+error: while searching for:
+        // 注释
+        // 以下为几行代码片断
+error: patch failed: source.php:38
+Applying patch source.php with 1 rejects...
+Rejected hunk #1.
+</code></pre></li>
+<li><p>Full Authentication needed to access the Atlas API</p>
+<p> <a href="https://community.hortonworks.com/questions/68255/got-401-full-authentication-is-required-to-access.html" target="_blank" rel="external">论坛帖子</a></p>
+<p> Per default, Atlas uses Basic Authentication. So use your Atlas user and password, e.g. like</p>
+<pre><code>curl -s -u admin:admin http://atlas-server:21000/api/atlas/types
+</code></pre></li>
+<li><p>Out of Memory</p>
+<pre><code>https://cwiki.apache.org//confluence/display/MAVEN/OutOfMemoryError
+</code></pre></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https:qinglin.github.io/2017/04/14/安装atlas/" data-title="Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/07/18/Research-about-Apache-Atlas-1/" title="关于数据治理工具Apache Atlas的研究">
+  <strong>上一篇：</strong><br/>
+  <span>
+  关于数据治理工具Apache Atlas的研究</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/14/Learning_Git/"  title="">
+ <strong>下一篇：</strong><br/> 
+ <span>(no title)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Atlas的安装和编译"><span class="toc-number">1.</span> <span class="toc-text">Atlas的安装和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译Atlas"><span class="toc-number">1.1.</span> <span class="toc-text">编译Atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas编译要求"><span class="toc-number">1.2.</span> <span class="toc-text">Atlas编译要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas安装与配置"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动atlas"><span class="toc-number">1.4.</span> <span class="toc-text">启动atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误排查"><span class="toc-number">1.5.</span> <span class="toc-text">错误排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka启动失败"><span class="toc-number">1.5.1.</span> <span class="toc-text">Kafka启动失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI-Keep-Loading"><span class="toc-number">1.5.2.</span> <span class="toc-text">UI Keep Loading</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Github-Hexo-博客，Linux/" title="Github, Hexo, 博客，Linux">Github, Hexo, 博客，Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Qinglin, Xia">Qinglin, Xia</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

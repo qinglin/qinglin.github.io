@@ -1,0 +1,620 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Bigwhite&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Qinglin, Xia">
+    
+
+    
+    <meta name="description" content="Apache Atlas详解By Qinglin,Xia 什么是Atlas？ Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题  数据孤岛与数据湖数据孤岛 数据孤岛是目前大数据领域面对的一">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bigwhite's Blog">
+<meta property="og:url" content="https:qinglin.github.io/2017/04/14/Research_about_Atals/index.html">
+<meta property="og:site_name" content="Bigwhite's Blog">
+<meta property="og:description" content="Apache Atlas详解By Qinglin,Xia 什么是Atlas？ Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题  数据孤岛与数据湖数据孤岛 数据孤岛是目前大数据领域面对的一">
+<meta property="og:image" content="http://i.imgur.com/DdrGsEN.png">
+<meta property="og:image" content="http://i.imgur.com/jVm0We9.png">
+<meta property="og:image" content="http://i.imgur.com/qdL7ViY.png">
+<meta property="og:image" content="http://i.imgur.com/FgDCGgX.png">
+<meta property="og:image" content="http://i.imgur.com/7pEgcNp.png">
+<meta property="og:image" content="http://i.imgur.com/vKubWUr.png">
+<meta property="og:image" content="http://i.imgur.com/uuZaSIL.png">
+<meta property="og:image" content="http://i.imgur.com/hhqnImj.png">
+<meta property="og:image" content="http://i.imgur.com/7LWI5Dx.png">
+<meta property="og:image" content="http://i.imgur.com/raYQMwv.png">
+<meta property="og:image" content="http://i.imgur.com/fsM4RVz.png">
+<meta property="og:image" content="http://i.imgur.com/I2VuECt.png">
+<meta property="og:image" content="http://i.imgur.com/SgHbrzC.png">
+<meta property="og:image" content="http://i.imgur.com/SywM5wC.png">
+<meta property="og:image" content="http://i.imgur.com/UdDRczg.png">
+<meta property="og:image" content="http://i.imgur.com/3pZmcft.png">
+<meta property="og:image" content="http://i.imgur.com/wWTACl0.png">
+<meta property="og:updated_time" content="2016-07-18T08:52:55.257Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bigwhite's Blog">
+<meta name="twitter:description" content="Apache Atlas详解By Qinglin,Xia 什么是Atlas？ Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题  数据孤岛与数据湖数据孤岛 数据孤岛是目前大数据领域面对的一">
+<meta name="twitter:image" content="http://i.imgur.com/DdrGsEN.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Bigwhite&#39;s Blog" title="Bigwhite&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Bigwhite&#39;s Blog">Bigwhite&#39;s Blog</a></h1>
+				<h2 class="blog-motto">This is where I write things about coding and my life</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:https:qinglin.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/14/Research_about_Atals/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-14T01:36:16.185Z" itemprop="datePublished"> 发表于 2017-04-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Atlas详解"><span class="toc-number">1.</span> <span class="toc-text">Apache Atlas详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Atlas？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Atlas？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据孤岛与数据湖"><span class="toc-number">1.2.</span> <span class="toc-text">数据孤岛与数据湖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据湖"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据湖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas可以做什么？"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas可以做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#你面对的问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">你面对的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Atlas的解决方式"><span class="toc-number">1.3.2.</span> <span class="toc-text">Atlas的解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Atlas的功能"><span class="toc-number">1.4.</span> <span class="toc-text">Apache Atlas的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据分类"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中化审计"><span class="toc-number">1.4.2.</span> <span class="toc-text">集中化审计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索-amp-血缘-查看"><span class="toc-number">1.4.3.</span> <span class="toc-text">搜索 & 血缘(查看)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全-amp-政策-引擎"><span class="toc-number">1.4.4.</span> <span class="toc-text">安全&政策 引擎</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas-的架构"><span class="toc-number">1.5.</span> <span class="toc-text">Atlas 的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要模块"><span class="toc-number">1.5.1.</span> <span class="toc-text">主要模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridges"><span class="toc-number">1.5.2.</span> <span class="toc-text">Bridges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notification"><span class="toc-number">1.5.3.</span> <span class="toc-text">Notification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache-Atlas的应用"><span class="toc-number">1.5.4.</span> <span class="toc-text">Apache Atlas的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Knowledge-Store"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">Apache Atlas – Knowledge Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Data-Life-Management"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">Apache Atlas – Data Life Management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Audit-Store"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">Apache Atlas – Audit Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Policy-Engine"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">Apache Atlas – Policy Engine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Security"><span class="toc-number">1.5.4.5.</span> <span class="toc-text">Apache Atlas – Security</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-System"><span class="toc-number">1.6.</span> <span class="toc-text">Type System</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Types-Overview"><span class="toc-number">1.6.1.</span> <span class="toc-text">Data Types Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Types-Instances-Overview"><span class="toc-number">1.6.2.</span> <span class="toc-text">Types Instances Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Search"><span class="toc-number">1.7.</span> <span class="toc-text">Search</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Falcon-UI"><span class="toc-number">1.7.1.</span> <span class="toc-text">Falcon UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walk-Through-A-Use-Case"><span class="toc-number">1.8.</span> <span class="toc-text">Walk Through A Use Case</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collect-Data"><span class="toc-number">1.8.1.</span> <span class="toc-text">Collect Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-on-Atlas"><span class="toc-number">1.8.2.</span> <span class="toc-text">Search on Atlas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-DB"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">Search based on DB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-Application"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">Search based on Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表格元数据"><span class="toc-number">1.8.2.3.</span> <span class="toc-text">表格元数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#血缘"><span class="toc-number">1.8.2.4.</span> <span class="toc-text">血缘</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Apache-Atlas详解"><a href="#Apache-Atlas详解" class="headerlink" title="Apache Atlas详解"></a>Apache Atlas详解</h1><p>By Qinglin,Xia</p>
+<h2 id="什么是Atlas？"><a href="#什么是Atlas？" class="headerlink" title="什么是Atlas？"></a>什么是Atlas？</h2><blockquote>
+<p>Atlas是数据治理中很重要的一个工具，它通过对元数据（Metadata）的管理，实现Hadoop中各个组件之间数据的流通与交换，亦或是与Hadoop外界组件的数据交流（如Mysql等数据库），从而实现跨平台的数据治理，解决数据孤岛(Data Solo)的问题</p>
+</blockquote>
+<h2 id="数据孤岛与数据湖"><a href="#数据孤岛与数据湖" class="headerlink" title="数据孤岛与数据湖"></a>数据孤岛与数据湖</h2><h3 id="数据孤岛"><a href="#数据孤岛" class="headerlink" title="数据孤岛"></a>数据孤岛</h3><blockquote>
+<p>数据孤岛是目前大数据领域面对的一大问题，我们可以把每个企业看做一个数据孤岛，在他们与其他企业进行数据流通的时候，因为数据定义，存储方式和维护方式的不同，使得合并或者交换数据变得异常困难。而当企业发展到一定阶段，每个事业部也可以看做是一个数据孤单，使得企业内部数据流通也出现巨大的困难</p>
+</blockquote>
+<h3 id="数据湖"><a href="#数据湖" class="headerlink" title="数据湖"></a>数据湖</h3><blockquote>
+<p>数据湖是把数据孤岛的数据打通，整合到一起，一个数据湖通常符合这三个条件：</p>
+<ul>
+<li>收集所有数据（Collect everything）: 数据湖可以包含各种数据，可以有raw data也可以有被处理过的数据 </li>
+<li>适用于所有场合 (Dive in anywhere)：数据湖使各行各业的用户都可以按照他们的标准修改，查看或者丰富里面的数据 </li>
+<li>灵活的访问模式 (Flexible access): 数据湖支持各种数据访问模式对共享的结构进行访问: batch, interactive, online, search,in-memory,etc</li>
+</ul>
+</blockquote>
+<p>More info: <a href="http://zh.hortonworks.com/blog/enterprise-hadoop-journey-data-lake/" target="_blank" rel="external">Enterprise Hadoop Journey to Data Lake</a></p>
+<h2 id="Atlas可以做什么？"><a href="#Atlas可以做什么？" class="headerlink" title="Atlas可以做什么？"></a>Atlas可以做什么？</h2><h3 id="你面对的问题"><a href="#你面对的问题" class="headerlink" title="你面对的问题"></a>你面对的问题</h3><ul>
+<li>你知道你的数据在那里么？ Do you know where is your data ?</li>
+<li>你知道这个指定数据集由谁负责么？ Do you know who is responsible of this specific<br>datasets ?</li>
+<li>你知道上周五是哪个应用或者任务修改了这块数据么？Do you know from which application or task this entity<br>was modified last friday ?</li>
+</ul>
+<h3 id="Atlas的解决方式"><a href="#Atlas的解决方式" class="headerlink" title="Atlas的解决方式"></a>Atlas的解决方式</h3><p>为了解决数据孤岛的问题，使数据湖得以实现，Hadoop提供了数据治理(Data Governance)的工具，而Apache Atlas就是其中很重要的一个工具。 它主要可以实现以下功能:</p>
+<ul>
+<li><p>搜索和追溯血统（Search and Proscriptive Lineage）– 可以使探究事先定义(pre-define)或者临时的(ad-hoc)数据和元数据变得更便利, 同时保留数据源的历史，便于追溯数据的起源，产生和演变</p>
+</li>
+<li><p>由元数据驱动的数据访问控制（Ranger + Atlas）</p>
+</li>
+<li><p>对商业数据(business data)或者工作数据(operational data)灵活建模</p>
+</li>
+<li><p>数据分类 – help understand the nature of data within Hadoop and classify it based on external and internal sources</p>
+</li>
+<li><p>与其他元数据工具进行数据交换 </p>
+</li>
+</ul>
+<h2 id="Apache-Atlas的功能"><a href="#Apache-Atlas的功能" class="headerlink" title="Apache Atlas的功能"></a>Apache Atlas的功能</h2><p>总结来说，Atlas的功能主要有以下四大类：</p>
+<h3 id="数据分类"><a href="#数据分类" class="headerlink" title="数据分类"></a>数据分类</h3><ul>
+<li>导入或定义以商业为导向的注解的分类 </li>
+<li>定义，注解，和自动捕获数据集与底层元素的关系，包括数据来源，数据终点，和获取过程 （Source, Target, and Derivation processes）</li>
+<li>导出元数据到第三方系统 </li>
+</ul>
+<h3 id="集中化审计"><a href="#集中化审计" class="headerlink" title="集中化审计"></a>集中化审计</h3><ul>
+<li>得到每个应用，进程的安全访问控制信息 </li>
+<li>得到execution, steps和activities的操作性信息</li>
+</ul>
+<h3 id="搜索-amp-血缘-查看"><a href="#搜索-amp-血缘-查看" class="headerlink" title="搜索 &amp; 血缘(查看)"></a>搜索 &amp; 血缘(查看)</h3><ul>
+<li>预先设定查看路径，用以浏览数据分类和信息审计</li>
+<li>用以Text为基准的搜索去定位相关的数据</li>
+<li>数据集血缘的可视化 Visualization of data set lineage</li>
+</ul>
+<h3 id="安全-amp-政策-引擎"><a href="#安全-amp-政策-引擎" class="headerlink" title="安全&amp;政策 引擎"></a>安全&amp;政策 引擎</h3><ul>
+<li>在runtime的数据分类机制政策 Policy at runtime based on data classification schemes</li>
+<li>定义预防数据掠夺的政策</li>
+</ul>
+<p>More Info: <a href="http://atlas.incubator.apache.org/index.html" target="_blank" rel="external">Features</a></p>
+<h2 id="Atlas-的架构"><a href="#Atlas-的架构" class="headerlink" title="Atlas 的架构"></a>Atlas 的架构</h2><p><img src="http://i.imgur.com/DdrGsEN.png" alt=""></p>
+<h3 id="主要模块"><a href="#主要模块" class="headerlink" title="主要模块"></a>主要模块</h3><ul>
+<li><p>Web应用 (A Web service): 提供了RESTful APIs以及一个Web UI，使用户可以创建，更新和搜索元数据（Metadata）。</p>
+</li>
+<li><p>元数据仓库 (Metadata store): Falcon用图(graph model)对元数据进行建模，用图数据库Titan对元数据进行具体操作。Titan有一系列的备选仓库可以用来维护图，包括一种嵌入式Berkeley DB, Apache HBase和Apache Cassandra。对备选仓库的选择将决定可选的服务层级。 </p>
+</li>
+<li><p>索引仓库(Index store): 为了使全文搜索在元数据上得以实现，Altas，通过Titan，对元数据建立了索引。而全文检索的备选仓库是像ElasticSearch或是Apache Solr的一个搜索后端。</p>
+</li>
+<li><p>Bridges / Hooks: 为了在Atlas中添加元数据，一种叫做”hooks”的libararis被各种应用启用，像是Apache Hive, Apache Falcon和Apache Sqoop, 它们都可以在各自系统中捕捉元数据events，并把这些events传送到Atlas中。而Atlas服务器则会吸收这些Events并更新他自己的仓库。</p>
+</li>
+<li><p>元数据提醒events（Metadata notification events）: 在Atlas中任意对元数据的更新，不论是通过Hooks或是API，都会通过events从Atlas传送到它下层的应用。像是Apache Ranger这样的应用会吸收这些events然后让管理员对他们进行操作，譬如:对访问控制的政策进行配置。</p>
+</li>
+<li><p>Notification服务器 (Notification Server): Atlas用Apache Kafka作为Notification服务器，使Hooks和它下层的应用可以就元数据提醒事件进行沟通(metadata notification events)。这些事件由hooks和Atlas写入到不同的Kafka主题中。Kafka可以对这些分散的应用实现宽松的成对整合。</p>
+</li>
+</ul>
+<h3 id="Bridges"><a href="#Bridges" class="headerlink" title="Bridges"></a>Bridges</h3><p>Bridge/Hook 的主要作用就是使得装有Bridge的应用，在生成一个entity的时候，也会有一个对应的entity在Atlas中生成。</p>
+<p>有这样Bridges的应用是：</p>
+<pre><code>- Hive Bridge
+- Sqoop Bridge
+- Falcon Bridge
+- Storm Bridge
+</code></pre><h3 id="Notification"><a href="#Notification" class="headerlink" title="Notification"></a>Notification</h3><p>Notification被应用于从Hook对Atlas的entity注册，和entity/type交换提醒。这些都由Kafka实现，Atlas启动时也默认启动Kafka Server。<br><img src="http://i.imgur.com/jVm0We9.png" alt=""></p>
+<p>More Info： <a href="http://atlas.incubator.apache.org/Architecture.html" target="_blank" rel="external">Atlas Architecture</a></p>
+<p><img src="http://i.imgur.com/qdL7ViY.png" alt=""><br>暂时没理解这个图？？</p>
+<h3 id="Apache-Atlas的应用"><a href="#Apache-Atlas的应用" class="headerlink" title="Apache Atlas的应用"></a>Apache Atlas的应用</h3><h4 id="Apache-Atlas-–-Knowledge-Store"><a href="#Apache-Atlas-–-Knowledge-Store" class="headerlink" title="Apache Atlas – Knowledge Store"></a>Apache Atlas – Knowledge Store</h4><p><img src="http://i.imgur.com/FgDCGgX.png" alt=""></p>
+<p>知识仓库通过以商业为导向的分类学来分类:</p>
+<ul>
+<li>数据集合 &amp; 对象 Data sets &amp; objects</li>
+<li>表/列 Tables / Columns</li>
+<li>逻辑上下文 Logical context</li>
+<li>起点，终点 Source, destination</li>
+</ul>
+<p>支持Atlas基本模块和外部第三方应用/数据治理工具的元数据交换</p>
+<p>Tech:</p>
+<ul>
+<li>Titan with Apache HBase</li>
+</ul>
+<h4 id="Apache-Atlas-–-Data-Life-Management"><a href="#Apache-Atlas-–-Data-Life-Management" class="headerlink" title="Apache Atlas – Data Life Management"></a>Apache Atlas – Data Life Management</h4><p><img src="http://i.imgur.com/7pEgcNp.png" alt=""></p>
+<p>功能：</p>
+<ul>
+<li>跨集群复制</li>
+<li>数据集合保留/驱逐</li>
+<li>迟到的数据处理</li>
+<li>自动化</li>
+</ul>
+<p>Tech：</p>
+<ul>
+<li>Apache Falcon</li>
+</ul>
+<h4 id="Apache-Atlas-–-Audit-Store"><a href="#Apache-Atlas-–-Audit-Store" class="headerlink" title="Apache Atlas – Audit Store"></a>Apache Atlas – Audit Store</h4><p><img src="http://i.imgur.com/vKubWUr.png" alt=""></p>
+<p>存储所有数据治理相关的Historical Repository</p>
+<ul>
+<li>安全性 Security: 访问权限的给予和拒绝 Access Grant &amp; Deny</li>
+<li>功能性 Operational: 数据起源和数据矩阵 Data Provenance &amp;<br>Metrics</li>
+<li>建立索引，使数据可搜索 Indexed and Searchable</li>
+</ul>
+<p>Tech:</p>
+<ul>
+<li>YARN ATS, Apache HBase, Apache Hive, Solr,<br>ElasticSearch<br>(Pluggable)</li>
+</ul>
+<h4 id="Apache-Atlas-–-Policy-Engine"><a href="#Apache-Atlas-–-Policy-Engine" class="headerlink" title="Apache Atlas – Policy Engine"></a>Apache Atlas – Policy Engine</h4><p><img src="http://i.imgur.com/uuZaSIL.png" alt=""><br>关于数据集合的合并以及时间的（data asset combinations<br>and time）政策条例</p>
+<ul>
+<li>基于元数据的</li>
+<li>基于地理位置的条例 Geo based rules</li>
+<li>基于时间的条例 Time-based rules</li>
+<li>列/属性禁用 Column /Attribute Prohibitions</li>
+<li>预览：Hive的行和列隐藏 Preview: Hive Row and Column Masking</li>
+</ul>
+<p>Tech:</p>
+<ul>
+<li>Ranger</li>
+</ul>
+<h4 id="Apache-Atlas-–-Security"><a href="#Apache-Atlas-–-Security" class="headerlink" title="Apache Atlas – Security"></a>Apache Atlas – Security</h4><p><img src="http://i.imgur.com/hhqnImj.png" alt=""></p>
+<p>建立基于数据分类的全球安全条例(global security policies)</p>
+<h2 id="Type-System"><a href="#Type-System" class="headerlink" title="Type System"></a>Type System</h2><h3 id="Data-Types-Overview"><a href="#Data-Types-Overview" class="headerlink" title="Data Types Overview"></a>Data Types Overview</h3><p><img src="http://i.imgur.com/7LWI5Dx.png" alt=""></p>
+<h3 id="Types-Instances-Overview"><a href="#Types-Instances-Overview" class="headerlink" title="Types Instances Overview"></a>Types Instances Overview</h3><p><img src="http://i.imgur.com/raYQMwv.png" alt=""></p>
+<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h2><p>有两种在Atlas中搜索元数据的方法:</p>
+<ul>
+<li>DSL</li>
+<li>全文检索 </li>
+</ul>
+<p><img src="http://i.imgur.com/fsM4RVz.png" alt=""></p>
+<h3 id="Falcon-UI"><a href="#Falcon-UI" class="headerlink" title="Falcon UI"></a>Falcon UI</h3><p><img src="http://i.imgur.com/I2VuECt.png" alt=""></p>
+<p>More Info: <a href="http://atlas.incubator.apache.org/Search.html" target="_blank" rel="external">Search Feature</a></p>
+<h2 id="Walk-Through-A-Use-Case"><a href="#Walk-Through-A-Use-Case" class="headerlink" title="Walk Through A Use Case"></a>Walk Through A Use Case</h2><h3 id="Collect-Data"><a href="#Collect-Data" class="headerlink" title="Collect Data"></a>Collect Data</h3><p><img src="http://i.imgur.com/SgHbrzC.png" alt=""></p>
+<p>从Twitter中导入数据，将Raw Data存入HDFS中，并构建四张表(tweets,users,url,Hash tags)将数据分别存入，通过分析生成的表格，构建基于Hive表格的Social Network。</p>
+<p>而在这每一步中，生成的数据的元数据都会被存入Atlas。</p>
+<h3 id="Search-on-Atlas"><a href="#Search-on-Atlas" class="headerlink" title="Search on Atlas"></a>Search on Atlas</h3><h4 id="Search-based-on-DB"><a href="#Search-based-on-DB" class="headerlink" title="Search based on DB"></a>Search based on DB</h4><p><img src="http://i.imgur.com/SywM5wC.png" alt=""></p>
+<h4 id="Search-based-on-Application"><a href="#Search-based-on-Application" class="headerlink" title="Search based on Application"></a>Search based on Application</h4><p><img src="http://i.imgur.com/UdDRczg.png" alt=""></p>
+<h4 id="表格元数据"><a href="#表格元数据" class="headerlink" title="表格元数据"></a>表格元数据</h4><p><img src="http://i.imgur.com/3pZmcft.png" alt=""></p>
+<h4 id="血缘"><a href="#血缘" class="headerlink" title="血缘"></a>血缘</h4><p><img src="http://i.imgur.com/wWTACl0.png" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https:qinglin.github.io/2017/04/14/Research_about_Atals/" data-title="Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/14/Install Lib in Pycharm/" title="">
+  <strong>上一篇：</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/14/Linux下安装mvn/"  title="">
+ <strong>下一篇：</strong><br/> 
+ <span>(no title)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Atlas详解"><span class="toc-number">1.</span> <span class="toc-text">Apache Atlas详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Atlas？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是Atlas？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据孤岛与数据湖"><span class="toc-number">1.2.</span> <span class="toc-text">数据孤岛与数据湖</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据湖"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据湖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas可以做什么？"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas可以做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#你面对的问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">你面对的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Atlas的解决方式"><span class="toc-number">1.3.2.</span> <span class="toc-text">Atlas的解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-Atlas的功能"><span class="toc-number">1.4.</span> <span class="toc-text">Apache Atlas的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据分类"><span class="toc-number">1.4.1.</span> <span class="toc-text">数据分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中化审计"><span class="toc-number">1.4.2.</span> <span class="toc-text">集中化审计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索-amp-血缘-查看"><span class="toc-number">1.4.3.</span> <span class="toc-text">搜索 & 血缘(查看)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全-amp-政策-引擎"><span class="toc-number">1.4.4.</span> <span class="toc-text">安全&政策 引擎</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas-的架构"><span class="toc-number">1.5.</span> <span class="toc-text">Atlas 的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主要模块"><span class="toc-number">1.5.1.</span> <span class="toc-text">主要模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bridges"><span class="toc-number">1.5.2.</span> <span class="toc-text">Bridges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notification"><span class="toc-number">1.5.3.</span> <span class="toc-text">Notification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache-Atlas的应用"><span class="toc-number">1.5.4.</span> <span class="toc-text">Apache Atlas的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Knowledge-Store"><span class="toc-number">1.5.4.1.</span> <span class="toc-text">Apache Atlas – Knowledge Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Data-Life-Management"><span class="toc-number">1.5.4.2.</span> <span class="toc-text">Apache Atlas – Data Life Management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Audit-Store"><span class="toc-number">1.5.4.3.</span> <span class="toc-text">Apache Atlas – Audit Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Policy-Engine"><span class="toc-number">1.5.4.4.</span> <span class="toc-text">Apache Atlas – Policy Engine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Apache-Atlas-–-Security"><span class="toc-number">1.5.4.5.</span> <span class="toc-text">Apache Atlas – Security</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-System"><span class="toc-number">1.6.</span> <span class="toc-text">Type System</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-Types-Overview"><span class="toc-number">1.6.1.</span> <span class="toc-text">Data Types Overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Types-Instances-Overview"><span class="toc-number">1.6.2.</span> <span class="toc-text">Types Instances Overview</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Search"><span class="toc-number">1.7.</span> <span class="toc-text">Search</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Falcon-UI"><span class="toc-number">1.7.1.</span> <span class="toc-text">Falcon UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Walk-Through-A-Use-Case"><span class="toc-number">1.8.</span> <span class="toc-text">Walk Through A Use Case</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collect-Data"><span class="toc-number">1.8.1.</span> <span class="toc-text">Collect Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-on-Atlas"><span class="toc-number">1.8.2.</span> <span class="toc-text">Search on Atlas</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-DB"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">Search based on DB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-based-on-Application"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">Search based on Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表格元数据"><span class="toc-number">1.8.2.3.</span> <span class="toc-text">表格元数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#血缘"><span class="toc-number">1.8.2.4.</span> <span class="toc-text">血缘</span></a></li></ol></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Github-Hexo-博客，Linux/" title="Github, Hexo, 博客，Linux">Github, Hexo, 博客，Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Atlas-数据湖，数据孤岛，数据治理/" title="Atlas, 数据湖，数据孤岛，数据治理">Atlas, 数据湖，数据孤岛，数据治理<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=null&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Qinglin, Xia">Qinglin, Xia</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
