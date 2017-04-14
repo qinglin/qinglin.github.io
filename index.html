@@ -78,220 +78,6 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/14/利用Pyhs2从Python导入数据到Hive/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-14T01:47:56.279Z" itemprop="datePublished"> 发表于 2017-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="利用Pyhs2从Python导入数据到Hive"><a href="#利用Pyhs2从Python导入数据到Hive" class="headerlink" title="利用Pyhs2从Python导入数据到Hive"></a>利用Pyhs2从Python导入数据到Hive</h1><hr>
-<h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
-<ul>
-<li><p>从<a href="https://pypi.python.org/pypi/ez_setup" target="_blank" rel="external">https://pypi.python.org/pypi/ez_setup</a> 下载ez_setup的tar包</p>
-<pre><code>- tar -vzxf ez_setup-**.tar.gz
-- python ez_setup.py
-- easy_install pip
-- yum install gcc-c++
-- yum install cyrus-sasl-devel.x86_64
-- yum install python-devel.x86_64
-- pip install pyhs2
-</code></pre></li>
-</ul>
-<h2 id="解决No-Mechanism-Available问题"><a href="#解决No-Mechanism-Available问题" class="headerlink" title="解决No Mechanism Available问题"></a>解决No Mechanism Available问题</h2><pre><code>thrift.transport.TTransport.TTransportException: Could not start SASL: Error in sasl_client_start (-4) SASL(-4): no mechanism available: No worthy mechs found
-</code></pre><ol>
-<li><p>检查是否安装所有配置所需要的包</p>
-<pre><code>rpm -qa | grep cyrus
-</code></pre><p> 至少需要有以下包</p>
-<pre><code>cyrus-sasl-lib-2.1.23-15.el6_6.2.x86_64
-cyrus-sasl-plain-2.1.23-15.el6_6.2.x86_64
-cyrus-sasl-md5-2.1.23-15.el6_6.2.x86_64
-cyrus-sasl-devel-2.1.23-15.el6_6.2.x86_64
-cyrus-sasl-2.1.23-15.el6_6.2.x86_64
-cyrus-sasl-gssapi-2.1.23-15.el6_6.2.x86_64
-</code></pre><p> 没有的话，yum install 安装所需的包</p>
-</li>
-<li>检查hive-site.xml配置<br>到 /etc/hive/conf/hive-site.xml 查看配置</li>
-</ol>
-<p>其中</p>
-<pre><code>&lt;property&gt;
-  &lt;name&gt;hive.server2.authentication&lt;/name&gt;
-  &lt;value&gt;KERBEROS&lt;/value&gt;
-&lt;/property&gt;
-</code></pre><p>可以把Value值改成NOSASL/PLAIN,etc</p>
-<p><a href="http://www.cloudera.com/documentation/archive/cdh/4-x/4-5-0/CDH4-Security-Guide/cdh4sg_topic_9_1.html" target="_blank" rel="external">More Info</a></p>
-<h2 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h2><pre><code>import pyhs2
-</code></pre><p>引入pyhs2 lib</p>
-<pre><code>hive_client = HiveClient(db_host=&apos;192.168.100.173&apos;, port=10000, user=&apos;user&apos;, password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
-</code></pre><p>连接到Hive服务器，其中host为hive主机的ip地址，port默认为10000，用户名密码不能为空，authMechanism的值必须与hive-site.xml配置文件中hive.server2.authentication的值相同。</p>
-<pre><code>class HiveClient:
-    # create connection to hive server2
-    def __init__(self, db_host, user, password, database, port=10000, authMechanism=&quot;PLAIN&quot;):
-        self.conn = pyhs2.connect(host=db_host,
-                                  port=port,
-                                  authMechanism=authMechanism,
-                                  user=user,
-                                  password=password,
-                                  database=database,
-                                  )
-
-    def query(self, sql):
-        with self.conn.cursor() as cursor:
-            cursor.execute(sql)
-            return cursor.fetch()
-
-    def loaddata(self, sql):
-        with self.conn.cursor() as cursor:
-            cursor.execute(sql)
-
-    def close(self):
-        self.conn.close()
-
-
-
-def main():
-    # 注意authMechanism初始的时候是PLAIN，最好的解决方案是加上认证模块
-    hive_client = HiveClient(db_host=&apos;192.168.100.171&apos;, port=10000, user=&apos;root&apos;, password=&apos;Qianxin123&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
-    print &quot;Connect to Hive!&quot;
-    # 测试select语句
-
-    sql = &apos;select * from country1;&apos;
-    print sql
-    try:
-        fetch = hive_client.query(sql)
-        for i in fetch:
-            print i
-        sql = &quot;insert into country1 values(1,/&quot;hello/&quot;)&quot;
-        hive_client.query(sql)
-        sql = &apos;select * from country1&apos;
-        fetch = hive_client.query(sql)
-        for i in fetch:
-            print i
-    except Exception as e:
-        print e
-    hive_client.close()
-
-
-if __name__ == &apos;__main__&apos;:
-    main()
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/14/Linux下安装mvn/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-14T01:46:27.125Z" itemprop="datePublished"> 发表于 2017-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Linux下安装mvn"><a href="#Linux下安装mvn" class="headerlink" title="Linux下安装mvn"></a>Linux下安装mvn</h1><h2 id="Linux下安装Apache-Maven攻略"><a href="#Linux下安装Apache-Maven攻略" class="headerlink" title="Linux下安装Apache Maven攻略"></a>Linux下安装Apache Maven攻略</h2><h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><ul>
-<li><p>Java Development Kit (JDK)</p>
-<pre><code>Maven 3.3 需安装JDK 1.7及以上版本
-</code></pre></li>
-<li><p>Memory</p>
-<pre><code>没有特别要求
-</code></pre></li>
-<li><p>Disk</p>
-<pre><code>安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间
-</code></pre></li>
-<li><p>Operating System</p>
-<pre><code>没有特别要求
-</code></pre></li>
-</ul>
-<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-</code></pre><h3 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h3><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
-</code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
-<pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
-</code></pre><p>安装确认</p>
-<pre><code>mvn -v
-</code></pre><p>结果应显示为</p>
-<pre><code>Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00)
-Maven home: /opt/apache-maven-3.3.3
-Java version: 1.8.0_45, vendor: Oracle Corporation
-Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre
-Default locale: en_US, platform encoding: UTF-8
-OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&quot;, family: &quot;mac&quot;
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
       <a href="/2017/04/14/Research_about_Atals/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
@@ -486,14 +272,14 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/14/Install Lib in Pycharm/" title="" itemprop="url"></a>
+      <a href="/2017/01/13/Install Lib in Pycharm/" title="Install Lib in Pycharm" itemprop="url">Install Lib in Pycharm</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-14T01:34:25.006Z" itemprop="datePublished"> 发表于 2017-04-14</time>
+    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
     
   </p>
 </header>
@@ -521,137 +307,10 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 <div class="article-catetags">
 
 
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/04/14/安装atlas/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
-		
-  <p class="article-time">
-    <time datetime="2017-04-14T01:29:53.566Z" itemprop="datePublished"> 发表于 2017-04-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Atlas的安装和编译"><a href="#Atlas的安装和编译" class="headerlink" title="Atlas的安装和编译"></a>Atlas的安装和编译</h1><h2 id="编译Atlas"><a href="#编译Atlas" class="headerlink" title="编译Atlas"></a>编译Atlas</h2><ol>
-<li><p>从git下载源码库</p>
-<pre><code>git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas
-git checkout altas-0.7-incubating
-</code></pre></li>
-<li><p>切换到atlas文件夹</p>
-<pre><code>cd atlas
-</code></pre></li>
-<li><p>编译atlas</p>
-<pre><code>export MAVEN_OPTS=&quot;-Xmx1536m -XX:MaxPermSize=512m&quot; &amp;&amp; mvn clean install -DskipTests -Drat.numUnapprovedLicenses=100
-</code></pre></li>
-<li><p>skip Licenses</p>
-<pre><code>http://stackoverflow.com/questions/30181154/skipping-some-license-tests-in-maven
-
--Drat.numUnapprovedLicenses=100
-</code></pre></li>
-<li><p>Skip test cases</p>
-<pre><code>mvn install 
-</code></pre></li>
-</ol>
-<h2 id="Atlas编译要求"><a href="#Atlas编译要求" class="headerlink" title="Atlas编译要求"></a>Atlas编译要求</h2><ol>
-<li><a href="https://qinglin.github.io/2016/08/01/Install_mvn/" target="_blank" rel="external">maven版本到3.1.0以上</a></li>
-</ol>
-<h2 id="Atlas安装与配置"><a href="#Atlas安装与配置" class="headerlink" title="Atlas安装与配置"></a>Atlas安装与配置</h2><ol>
-<li>mvn clean package -Pdist -DskipTests</li>
-<li><p>编译完之后解压生成的tar包 </p>
-<pre><code>tar -xzvf apache-atlas-${project.version}-bin.tar.gz
-cd atlas-${project.version}
-</code></pre></li>
-<li><p>配置atlas参数</p>
-<p> 所有atlas参数配置都在conf文件夹下，这里主要修改atlas-application.properties的配置</p>
-<p> 配置kafka相关参数</p>
-<pre><code>atlas.notification.embedded=false
-atlas.kafka.data=${sys:atlas.home}/data/kafka
-atlas.kafka.zookeeper.connect=localhost:2181
-atlas.kafka.bootstrap.servers=fsdn1:6667
-</code></pre><p> 配置Zookeeper相关参数</p>
-<pre><code>atlas.audit.hbase.zookeeper.quorum={zookeeeper_host}:2181
-</code></pre></li>
-</ol>
-<h2 id="启动atlas"><a href="#启动atlas" class="headerlink" title="启动atlas"></a>启动atlas</h2><pre><code>bin/atlas_start.py 
-</code></pre><p>这样可在浏览器中输入：<a href="http://localhost:21000，就可以打开atlas的web页面" target="_blank" rel="external">http://localhost:21000，就可以打开atlas的web页面</a></p>
-<h2 id="错误排查"><a href="#错误排查" class="headerlink" title="错误排查"></a>错误排查</h2><h3 id="Kafka启动失败"><a href="#Kafka启动失败" class="headerlink" title="Kafka启动失败"></a>Kafka启动失败</h3><p><img src="http://i.imgur.com/8PV1nse.png" alt=""></p>
-<p><img src="http://i.imgur.com/cCZkhAV.png" alt=""></p>
-<p><img src="http://i.imgur.com/rY5yDmV.png" alt=""></p>
-<p><img src="http://i.imgur.com/2SIOANs.png" alt=""></p>
-<pre><code>论坛提问： https://community.hortonworks.com/questions/67795/fail-to-start-kafka-when-starting-the-atlas.html
-
-关闭Zookeeper，报错Connection Refused
-开启Zookeeper，报错cannot assign requested address
-</code></pre><p>Resolution:<br>修改Kafka相关参数：</p>
-<pre><code>atlas.notification.embedded=false
-</code></pre><p><a href="http://dev.hortonworks.com.s3.amazonaws.com/HDPDocuments/Ambari-Trunk/bk_ambari_reference_guide/content/ch_integrating_atlas.html_" target="_blank" rel="external">参考资料 – 集成atlas与kafka</a></p>
-<h3 id="UI-Keep-Loading"><a href="#UI-Keep-Loading" class="headerlink" title="UI Keep Loading"></a>UI Keep Loading</h3><p>如图：</p>
-<p><img src="http://i.imgur.com/4p9O632.png" alt=""></p>
-<p><a href="https://community.hortonworks.com/questions/67816/atlas-ui-keep-loading-after-logged-in.html" target="_blank" rel="external">论坛提问贴 – 多亏了这个帖子，找到了解决方案</a></p>
-<p>Resolution： </p>
-<p>根据论坛的回复，有两个解决方案，我用了第一种，就是下载hdp2.5然后把atlas web相关的文件夹覆盖掉0.7的文件夹</p>
-<ol>
-<li><p>I have replaced web folder from Sandbox(HDP 2.5 with Atlas 0.7) and it worked fine.</p>
-<pre><code>下载HDP2.5，找到usr/hdp/2.5.0.0-1245/atlas文件夹，将其中的web相关文件夹copy and replace原本atlas的对应文件夹
-![](http://i.imgur.com/CEvYjx5.png)
-</code></pre></li>
-<li><p>Download the patch and git apply it – <a href="https://issues.apache.org/jira/browse/ATLAS-1199" target="_blank" rel="external">ATLAS-1199-PATCH</a></p>
-<p> Git Apply Patch Failed (<a href="http://www.fwolf.com/blog/post/448" target="_blank" rel="external">http://www.fwolf.com/blog/post/448</a>) </p>
-<pre><code>$ git apply --reject 0001-BUG-Sybase.patch
-Checking patch source.php...
-error: while searching for:
-        // 注释
-        // 以下为几行代码片断
-error: patch failed: source.php:38
-Applying patch source.php with 1 rejects...
-Rejected hunk #1.
-</code></pre></li>
-<li><p>Full Authentication needed to access the Atlas API</p>
-<p> <a href="https://community.hortonworks.com/questions/68255/got-401-full-authentication-is-required-to-access.html" target="_blank" rel="external">论坛帖子</a></p>
-<p> Per default, Atlas uses Basic Authentication. So use your Atlas user and password, e.g. like</p>
-<pre><code>curl -s -u admin:admin http://atlas-server:21000/api/atlas/types
-</code></pre></li>
-<li><p>Out of Memory</p>
-<pre><code>https://cwiki.apache.org//confluence/display/MAVEN/OutOfMemoryError
-</code></pre></li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Pycharm-Python/">Pycharm, Python</a>
+  </div>
 
 </div>
 
@@ -828,6 +487,369 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
   <div class="article-tags">
   
   <span></span> <a href="/tags/Git-Command-Line/">Git, Command Line</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/13/安装atlas/" title="Apache Atlas的安装和编译" itemprop="url">Apache Atlas的安装和编译</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>最近一直在做公司数据湖的项目，我们用的是Apache正在incubating的开源项目atlas, atlas在管理元数据方面的功能十分强大。</p>
+<p>这篇blog是介绍如何在centos中编译和安装atlas</p>
+<h1 id="Atlas的安装和编译"><a href="#Atlas的安装和编译" class="headerlink" title="Atlas的安装和编译"></a>Atlas的安装和编译</h1><h2 id="编译Atlas"><a href="#编译Atlas" class="headerlink" title="编译Atlas"></a>编译Atlas</h2><ol>
+<li><p>从git下载源码库</p>
+<pre><code>git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas
+git checkout altas-0.7-incubating
+</code></pre></li>
+<li><p>切换到atlas文件夹</p>
+<pre><code>cd atlas
+</code></pre></li>
+<li><p>编译atlas</p>
+<pre><code>export MAVEN_OPTS=&quot;-Xmx1536m -XX:MaxPermSize=512m&quot; &amp;&amp; mvn clean install -DskipTests -Drat.numUnapprovedLicenses=100
+</code></pre></li>
+<li><p>skip Licenses</p>
+<pre><code>http://stackoverflow.com/questions/30181154/skipping-some-license-tests-in-maven
+
+-Drat.numUnapprovedLicenses=100
+</code></pre></li>
+<li><p>Skip test cases</p>
+<pre><code>mvn install 
+</code></pre></li>
+</ol>
+<h2 id="Atlas编译要求"><a href="#Atlas编译要求" class="headerlink" title="Atlas编译要求"></a>Atlas编译要求</h2><ol>
+<li><a href="https://qinglin.github.io/2016/08/01/Install_mvn/" target="_blank" rel="external">maven版本到3.1.0以上</a></li>
+</ol>
+<h2 id="Atlas安装与配置"><a href="#Atlas安装与配置" class="headerlink" title="Atlas安装与配置"></a>Atlas安装与配置</h2><ol>
+<li>mvn clean package -Pdist -DskipTests</li>
+<li><p>编译完之后解压生成的tar包 </p>
+<pre><code>tar -xzvf apache-atlas-${project.version}-bin.tar.gz
+cd atlas-${project.version}
+</code></pre></li>
+<li><p>配置atlas参数</p>
+<p> 所有atlas参数配置都在conf文件夹下，这里主要修改atlas-application.properties的配置</p>
+<p> 配置kafka相关参数</p>
+<pre><code>atlas.notification.embedded=false
+atlas.kafka.data=${sys:atlas.home}/data/kafka
+atlas.kafka.zookeeper.connect=localhost:2181
+atlas.kafka.bootstrap.servers=fsdn1:6667
+</code></pre><p> 配置Zookeeper相关参数</p>
+<pre><code>atlas.audit.hbase.zookeeper.quorum={zookeeeper_host}:2181
+</code></pre></li>
+</ol>
+<h2 id="启动atlas"><a href="#启动atlas" class="headerlink" title="启动atlas"></a>启动atlas</h2><pre><code>bin/atlas_start.py 
+</code></pre><p>这样可在浏览器中输入：<a href="http://localhost:21000，就可以打开atlas的web页面" target="_blank" rel="external">http://localhost:21000，就可以打开atlas的web页面</a></p>
+<h2 id="错误排查"><a href="#错误排查" class="headerlink" title="错误排查"></a>错误排查</h2><h3 id="Kafka启动失败"><a href="#Kafka启动失败" class="headerlink" title="Kafka启动失败"></a>Kafka启动失败</h3><p><img src="http://i.imgur.com/8PV1nse.png" alt=""></p>
+<p><img src="http://i.imgur.com/cCZkhAV.png" alt=""></p>
+<p><img src="http://i.imgur.com/rY5yDmV.png" alt=""></p>
+<p><img src="http://i.imgur.com/2SIOANs.png" alt=""></p>
+<pre><code>论坛提问： https://community.hortonworks.com/questions/67795/fail-to-start-kafka-when-starting-the-atlas.html
+
+关闭Zookeeper，报错Connection Refused
+开启Zookeeper，报错cannot assign requested address
+</code></pre><p>Resolution:<br>修改Kafka相关参数：</p>
+<pre><code>atlas.notification.embedded=false
+</code></pre><p><a href="http://dev.hortonworks.com.s3.amazonaws.com/HDPDocuments/Ambari-Trunk/bk_ambari_reference_guide/content/ch_integrating_atlas.html_" target="_blank" rel="external">参考资料 – 集成atlas与kafka</a></p>
+<h3 id="UI-Keep-Loading"><a href="#UI-Keep-Loading" class="headerlink" title="UI Keep Loading"></a>UI Keep Loading</h3><p>如图：</p>
+<p><img src="http://i.imgur.com/4p9O632.png" alt=""></p>
+<p><a href="https://community.hortonworks.com/questions/67816/atlas-ui-keep-loading-after-logged-in.html" target="_blank" rel="external">论坛提问贴 – 多亏了这个帖子，找到了解决方案</a></p>
+<p>Resolution： </p>
+<p>根据论坛的回复，有两个解决方案，我用了第一种，就是下载hdp2.5然后把atlas web相关的文件夹覆盖掉0.7的文件夹</p>
+<ol>
+<li><p>I have replaced web folder from Sandbox(HDP 2.5 with Atlas 0.7) and it worked fine.</p>
+<pre><code>下载HDP2.5，找到usr/hdp/2.5.0.0-1245/atlas文件夹，将其中的web相关文件夹copy and replace原本atlas的对应文件夹
+![](http://i.imgur.com/CEvYjx5.png)
+</code></pre></li>
+<li><p>Download the patch and git apply it – <a href="https://issues.apache.org/jira/browse/ATLAS-1199" target="_blank" rel="external">ATLAS-1199-PATCH</a></p>
+<p> Git Apply Patch Failed (<a href="http://www.fwolf.com/blog/post/448" target="_blank" rel="external">http://www.fwolf.com/blog/post/448</a>) </p>
+<pre><code>$ git apply --reject 0001-BUG-Sybase.patch
+Checking patch source.php...
+error: while searching for:
+        // 注释
+        // 以下为几行代码片断
+error: patch failed: source.php:38
+Applying patch source.php with 1 rejects...
+Rejected hunk #1.
+</code></pre></li>
+<li><p>Full Authentication needed to access the Atlas API</p>
+<p> <a href="https://community.hortonworks.com/questions/68255/got-401-full-authentication-is-required-to-access.html" target="_blank" rel="external">论坛帖子</a></p>
+<p> Per default, Atlas uses Basic Authentication. So use your Atlas user and password, e.g. like</p>
+<pre><code>curl -s -u admin:admin http://atlas-server:21000/api/atlas/types
+</code></pre></li>
+<li><p>Out of Memory</p>
+<pre><code>https://cwiki.apache.org//confluence/display/MAVEN/OutOfMemoryError
+</code></pre></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Apache-Atlas-数据湖/">Apache Atlas,数据湖</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/13/Linux下安装mvn/" title="在Linux环境下安装maven" itemprop="url">在Linux环境下安装maven</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Linux下安装mvn"><a href="#Linux下安装mvn" class="headerlink" title="Linux下安装mvn"></a>Linux下安装mvn</h1><h2 id="Linux下安装Apache-Maven攻略"><a href="#Linux下安装Apache-Maven攻略" class="headerlink" title="Linux下安装Apache Maven攻略"></a>Linux下安装Apache Maven攻略</h2><h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><ul>
+<li><p>Java Development Kit (JDK)</p>
+<pre><code>Maven 3.3 需安装JDK 1.7及以上版本
+</code></pre></li>
+<li><p>Memory</p>
+<pre><code>没有特别要求
+</code></pre></li>
+<li><p>Disk</p>
+<pre><code>安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间
+</code></pre></li>
+<li><p>Operating System</p>
+<pre><code>没有特别要求
+</code></pre></li>
+</ul>
+<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+</code></pre><h3 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h3><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
+</code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
+<pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
+</code></pre><p>安装确认</p>
+<pre><code>mvn -v
+</code></pre><p>结果应显示为</p>
+<pre><code>Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00)
+Maven home: /opt/apache-maven-3.3.3
+Java version: 1.8.0_45, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&quot;, family: &quot;mac&quot;
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Maven，Linux/">Maven，Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/01/13/利用Pyhs2从Python导入数据到Hive/" title="利用Pyhs2从Python导入数据到Hive" itemprop="url">利用Pyhs2从Python导入数据到Hive</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="利用Pyhs2从Python导入数据到Hive"><a href="#利用Pyhs2从Python导入数据到Hive" class="headerlink" title="利用Pyhs2从Python导入数据到Hive"></a>利用Pyhs2从Python导入数据到Hive</h1><hr>
+<h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
+<ul>
+<li><p>从<a href="https://pypi.python.org/pypi/ez_setup" target="_blank" rel="external">https://pypi.python.org/pypi/ez_setup</a> 下载ez_setup的tar包</p>
+<pre><code>- tar -vzxf ez_setup-**.tar.gz
+- python ez_setup.py
+- easy_install pip
+- yum install gcc-c++
+- yum install cyrus-sasl-devel.x86_64
+- yum install python-devel.x86_64
+- pip install pyhs2
+</code></pre></li>
+</ul>
+<h2 id="解决No-Mechanism-Available问题"><a href="#解决No-Mechanism-Available问题" class="headerlink" title="解决No Mechanism Available问题"></a>解决No Mechanism Available问题</h2><pre><code>thrift.transport.TTransport.TTransportException: Could not start SASL: Error in sasl_client_start (-4) SASL(-4): no mechanism available: No worthy mechs found
+</code></pre><ol>
+<li><p>检查是否安装所有配置所需要的包</p>
+<pre><code>rpm -qa | grep cyrus
+</code></pre><p> 至少需要有以下包</p>
+<pre><code>cyrus-sasl-lib-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-plain-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-md5-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-devel-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-2.1.23-15.el6_6.2.x86_64
+cyrus-sasl-gssapi-2.1.23-15.el6_6.2.x86_64
+</code></pre><p> 没有的话，yum install 安装所需的包</p>
+</li>
+<li>检查hive-site.xml配置<br>到 /etc/hive/conf/hive-site.xml 查看配置</li>
+</ol>
+<p>其中</p>
+<pre><code>&lt;property&gt;
+  &lt;name&gt;hive.server2.authentication&lt;/name&gt;
+  &lt;value&gt;KERBEROS&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>可以把Value值改成NOSASL/PLAIN,etc</p>
+<p><a href="http://www.cloudera.com/documentation/archive/cdh/4-x/4-5-0/CDH4-Security-Guide/cdh4sg_topic_9_1.html" target="_blank" rel="external">More Info</a></p>
+<h2 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h2><pre><code>import pyhs2
+</code></pre><p>引入pyhs2 lib</p>
+<pre><code>hive_client = HiveClient(db_host=&apos;192.168.100.173&apos;, port=10000, user=&apos;user&apos;, password=&apos;password&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+</code></pre><p>连接到Hive服务器，其中host为hive主机的ip地址，port默认为10000，用户名密码不能为空，authMechanism的值必须与hive-site.xml配置文件中hive.server2.authentication的值相同。</p>
+<pre><code>class HiveClient:
+    # create connection to hive server2
+    def __init__(self, db_host, user, password, database, port=10000, authMechanism=&quot;PLAIN&quot;):
+        self.conn = pyhs2.connect(host=db_host,
+                                  port=port,
+                                  authMechanism=authMechanism,
+                                  user=user,
+                                  password=password,
+                                  database=database,
+                                  )
+
+    def query(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+            return cursor.fetch()
+
+    def loaddata(self, sql):
+        with self.conn.cursor() as cursor:
+            cursor.execute(sql)
+
+    def close(self):
+        self.conn.close()
+
+
+
+def main():
+    # 注意authMechanism初始的时候是PLAIN，最好的解决方案是加上认证模块
+    hive_client = HiveClient(db_host=&apos;192.168.100.171&apos;, port=10000, user=&apos;root&apos;, password=&apos;Qianxin123&apos;, database=&apos;default&apos;, authMechanism=&apos;PLAIN&apos;)
+    print &quot;Connect to Hive!&quot;
+    # 测试select语句
+
+    sql = &apos;select * from country1;&apos;
+    print sql
+    try:
+        fetch = hive_client.query(sql)
+        for i in fetch:
+            print i
+        sql = &quot;insert into country1 values(1,/&quot;hello/&quot;)&quot;
+        hive_client.query(sql)
+        sql = &apos;select * from country1&apos;
+        fetch = hive_client.query(sql)
+        for i in fetch:
+            print i
+    except Exception as e:
+        print e
+    hive_client.close()
+
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python-Hive/">Python,Hive</a>
   </div>
 
 </div>
@@ -1225,6 +1247,22 @@ npm install hexo-generator-sitemap@1 --save
 		
 			
 				<li><a href="/tags/Git-Command-Line/" title="Git, Command Line">Git, Command Line<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Maven，Linux/" title="Maven，Linux">Maven，Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Pycharm-Python/" title="Pycharm, Python">Pycharm, Python<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python-Hive/" title="Python,Hive">Python,Hive<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Apache-Atlas-数据湖/" title="Apache Atlas,数据湖">Apache Atlas,数据湖<sup>1</sup></a></li>
 			
 		
 		</ul>
