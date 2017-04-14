@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="利用Pyhs2从Python导入数据到Hive 安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++">
+    <meta name="description" content="安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++ - yum install cyrus-sas">
 <meta name="keywords" content="Python,Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Pyhs2从Python导入数据到Hive">
 <meta property="og:url" content="https:qinglin.github.io/2017/01/13/利用Pyhs2从Python导入数据到Hive/index.html">
 <meta property="og:site_name" content="Bigwhite's Blog">
-<meta property="og:description" content="利用Pyhs2从Python导入数据到Hive 安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++">
-<meta property="og:updated_time" content="2017-04-14T02:38:35.884Z">
+<meta property="og:description" content="安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++ - yum install cyrus-sas">
+<meta property="og:updated_time" content="2017-04-14T03:00:40.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Pyhs2从Python导入数据到Hive">
-<meta name="twitter:description" content="利用Pyhs2从Python导入数据到Hive 安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++">
+<meta name="twitter:description" content="安装Pyhs2在CentOS上安装Pyhs2流程如下：  从https://pypi.python.org/pypi/ez_setup 下载ez_setup的tar包 - tar -vzxf ez_setup-**.tar.gz - python ez_setup.py - easy_install pip - yum install gcc-c++ - yum install cyrus-sas">
 
     
     <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
@@ -97,12 +97,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#利用Pyhs2从Python导入数据到Hive"><span class="toc-number">1.</span> <span class="toc-text">利用Pyhs2从Python导入数据到Hive</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Pyhs2"><span class="toc-number">1.1.</span> <span class="toc-text">安装Pyhs2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决No-Mechanism-Available问题"><span class="toc-number">1.2.</span> <span class="toc-text">解决No Mechanism Available问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python代码"><span class="toc-number">1.3.</span> <span class="toc-text">Python代码</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Pyhs2"><span class="toc-number">1.</span> <span class="toc-text">安装Pyhs2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决No-Mechanism-Available问题"><span class="toc-number">2.</span> <span class="toc-text">解决No Mechanism Available问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python代码"><span class="toc-number">3.</span> <span class="toc-text">Python代码</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="利用Pyhs2从Python导入数据到Hive"><a href="#利用Pyhs2从Python导入数据到Hive" class="headerlink" title="利用Pyhs2从Python导入数据到Hive"></a>利用Pyhs2从Python导入数据到Hive</h1><hr>
-<h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
+		<h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
 <ul>
 <li><p>从<a href="https://pypi.python.org/pypi/ez_setup" target="_blank" rel="external">https://pypi.python.org/pypi/ez_setup</a> 下载ez_setup的tar包</p>
 <pre><code>- tar -vzxf ez_setup-**.tar.gz
@@ -239,7 +238,7 @@ if __name__ == &apos;__main__&apos;:
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#利用Pyhs2从Python导入数据到Hive"><span class="toc-number">1.</span> <span class="toc-text">利用Pyhs2从Python导入数据到Hive</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Pyhs2"><span class="toc-number">1.1.</span> <span class="toc-text">安装Pyhs2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决No-Mechanism-Available问题"><span class="toc-number">1.2.</span> <span class="toc-text">解决No Mechanism Available问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python代码"><span class="toc-number">1.3.</span> <span class="toc-text">Python代码</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Pyhs2"><span class="toc-number">1.</span> <span class="toc-text">安装Pyhs2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决No-Mechanism-Available问题"><span class="toc-number">2.</span> <span class="toc-text">解决No Mechanism Available问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python代码"><span class="toc-number">3.</span> <span class="toc-text">Python代码</span></a></li></ol>
  
   </div>
 

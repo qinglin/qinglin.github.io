@@ -91,7 +91,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="Install-Lib-in-Pycharm"><a href="#Install-Lib-in-Pycharm" class="headerlink" title="Install Lib in Pycharm"></a>Install Lib in Pycharm</h1><p>在pycharm中安装lib的方法非常简单</p>
+        <p>在pycharm中安装lib的方法非常简单</p>
 <ol>
 <li>打开File-&gt; Setting</li>
 <li>选择Project:你需要添加lib的project</li>
@@ -156,7 +156,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="Git-命令大全"><a href="#Git-命令大全" class="headerlink" title="Git 命令大全"></a>Git 命令大全</h1><h2 id="设定你的Git"><a href="#设定你的Git" class="headerlink" title="设定你的Git"></a>设定你的Git</h2><ul>
+        <h2 id="设定你的Git"><a href="#设定你的Git" class="headerlink" title="设定你的Git"></a>设定你的Git</h2><ul>
 <li><p>设定作者的信息</p>
 <pre><code>git config --global user.name &quot;jimmy kuo&quot;
 git config --global user.email &quot;jimmy@gogojimmy.net&quot;
@@ -190,16 +190,15 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
 </code></pre><p><img src="http://i.imgur.com/Ll6xudL.png" alt=""></p>
 </li>
 <li><p>git log –stat</p>
+<p> <img src="http://i.imgur.com/3RgN4PG.png" alt=""></p>
+</li>
+<li><p>git log -p</p>
 </li>
 </ul>
-<p><img src="http://i.imgur.com/3RgN4PG.png" alt=""></p>
-<ul>
-<li>git log -p</li>
-</ul>
 <p>更详细的变更内容，具体到代码</p>
-<p><img src="http://i.imgur.com/i6B0lJY.png" alt=""></p>
+<p>   <img src="http://i.imgur.com/i6B0lJY.png" alt=""></p>
 <h2 id="Git流程整理"><a href="#Git流程整理" class="headerlink" title="Git流程整理"></a>Git流程整理</h2><p>修改file -&gt; 加入stage(git add) -&gt; 提交（git commit）-&gt; 继续修改其他file</p>
-<h1 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h1><ul>
+<h2 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h2><ul>
 <li><p>查看当前branch</p>
 <pre><code>git branch
 </code></pre></li>
@@ -213,9 +212,10 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
 <pre><code>git checkout cat
 </code></pre></li>
 </ul>
-<h2 id="合并branch到master-branch"><a href="#合并branch到master-branch" class="headerlink" title="合并branch到master branch"></a>合并branch到master branch</h2><pre><code>git rebase
-</code></pre><p>基于master branch目前最后一次的commit内容再往后把你在cat branch上commit的内容加上去</p>
-<ul>
+<h2 id="合并branch到master-branch"><a href="#合并branch到master-branch" class="headerlink" title="合并branch到master branch"></a>合并branch到master branch</h2><ul>
+<li><p>基于master branch目前最后一次的commit内容再往后把你在cat branch上commit的内容加上去</p>
+<pre><code>git rebase
+</code></pre></li>
 <li><p>查看master branch和其他branch的差异</p>
 <pre><code>git diff
 </code></pre></li>
@@ -472,7 +472,7 @@ Rejected hunk #1.
 </header>
     <div class="article-content">
         
-        <h1 id="Linux下安装mvn"><a href="#Linux下安装mvn" class="headerlink" title="Linux下安装mvn"></a>Linux下安装mvn</h1><h2 id="Linux下安装Apache-Maven攻略"><a href="#Linux下安装Apache-Maven攻略" class="headerlink" title="Linux下安装Apache Maven攻略"></a>Linux下安装Apache Maven攻略</h2><h3 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h3><ul>
+        <h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><ul>
 <li><p>Java Development Kit (JDK)</p>
 <pre><code>Maven 3.3 需安装JDK 1.7及以上版本
 </code></pre></li>
@@ -486,8 +486,8 @@ Rejected hunk #1.
 <pre><code>没有特别要求
 </code></pre></li>
 </ul>
-<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-</code></pre><h3 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h3><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
+<h2 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h2><pre><code>wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+</code></pre><h2 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h2><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
 </code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
 <pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
 </code></pre><p>安装确认</p>
@@ -553,8 +553,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 </header>
     <div class="article-content">
         
-        <h1 id="利用Pyhs2从Python导入数据到Hive"><a href="#利用Pyhs2从Python导入数据到Hive" class="headerlink" title="利用Pyhs2从Python导入数据到Hive"></a>利用Pyhs2从Python导入数据到Hive</h1><hr>
-<h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
+        <h2 id="安装Pyhs2"><a href="#安装Pyhs2" class="headerlink" title="安装Pyhs2"></a>安装Pyhs2</h2><p>在CentOS上安装Pyhs2流程如下：</p>
 <ul>
 <li><p>从<a href="https://pypi.python.org/pypi/ez_setup" target="_blank" rel="external">https://pypi.python.org/pypi/ez_setup</a> 下载ez_setup的tar包</p>
 <pre><code>- tar -vzxf ez_setup-**.tar.gz
