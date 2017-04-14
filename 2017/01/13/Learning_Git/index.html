@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://i.imgur.com/Ll6xudL.png">
 <meta property="og:image" content="http://i.imgur.com/3RgN4PG.png">
 <meta property="og:image" content="http://i.imgur.com/i6B0lJY.png">
-<meta property="og:updated_time" content="2017-04-14T02:59:13.412Z">
+<meta property="og:updated_time" content="2017-04-14T03:04:56.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git命令大全">
 <meta name="twitter:description" content="设定你的Git 设定作者的信息 git config --global user.name &amp;quot;jimmy kuo&amp;quot; git config --global user.email &amp;quot;jimmy@gogojimmy.net&amp;quot;    查看git的设定 git config -- list   建立自己的Git Repository 自己建立一个新的Reposito">
@@ -101,7 +101,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">4.</span> <span class="toc-text">Git流程整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branch"><span class="toc-number">5.</span> <span class="toc-text">Git Branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">6.</span> <span class="toc-text">合并branch到master branch</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number"></span> <span class="toc-text">Confict: 冲突处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">1.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">2.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">3.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">4.</span> <span class="toc-text">Git流程整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branch"><span class="toc-number">5.</span> <span class="toc-text">Git Branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">6.</span> <span class="toc-text">合并branch到master branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number">7.</span> <span class="toc-text">Confict: 冲突处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">8.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">9.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">10.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol>
 		
 		</div>
 		
@@ -124,8 +124,10 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
 <pre><code>git clone
 </code></pre></li>
 </ul>
-<h2 id="Git的基本功-status-add-commit-log-gitignore"><a href="#Git的基本功-status-add-commit-log-gitignore" class="headerlink" title="Git的基本功(status, add, commit, log, .gitignore)"></a>Git的基本功(status, add, commit, log, .gitignore)</h2><pre><code>git status 
-</code></pre><ul>
+<h2 id="Git的基本功-status-add-commit-log-gitignore"><a href="#Git的基本功-status-add-commit-log-gitignore" class="headerlink" title="Git的基本功(status, add, commit, log, .gitignore)"></a>Git的基本功(status, add, commit, log, .gitignore)</h2><ul>
+<li><p>查看git repository的修改状况</p>
+<pre><code>git status 
+</code></pre></li>
 <li><p>Untracked files（未被追踪的files，新增/修改的files还没被提交到git repository上的）</p>
 <pre><code>git add *
 </code></pre></li>
@@ -136,8 +138,10 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
 </li>
 <li><p>git log</p>
 <pre><code>查看过去commit的记录
-</code></pre><p><img src="http://i.imgur.com/Ll6xudL.png" alt=""></p>
-</li>
+</code></pre></li>
+</ul>
+<p><img src="http://i.imgur.com/Ll6xudL.png" alt=""></p>
+<ul>
 <li><p>git log –stat</p>
 <p> <img src="http://i.imgur.com/3RgN4PG.png" alt=""></p>
 </li>
@@ -172,7 +176,7 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
 <pre><code>git merge cat
 </code></pre></li>
 </ul>
-<h1 id="Confict-冲突处理"><a href="#Confict-冲突处理" class="headerlink" title="Confict: 冲突处理"></a>Confict: 冲突处理</h1><p>通常在merge或是rebase的过程中产生了confict，这时候git会停下来请你去处理</p>
+<h2 id="Confict-冲突处理"><a href="#Confict-冲突处理" class="headerlink" title="Confict: 冲突处理"></a>Confict: 冲突处理</h2><p>通常在merge或是rebase的过程中产生了confict，这时候git会停下来请你去处理</p>
 <ol>
 <li>将发生confict的档案打开，处理内容(删除&lt;&lt;&lt;.===,&gt;&gt;&gt;)</li>
 <li>使用git add 将处理好的file加入stage</li>
@@ -285,7 +289,7 @@ git config --global user.email &quot;jimmy@gogojimmy.net&quot;
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">4.</span> <span class="toc-text">Git流程整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branch"><span class="toc-number">5.</span> <span class="toc-text">Git Branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">6.</span> <span class="toc-text">合并branch到master branch</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number"></span> <span class="toc-text">Confict: 冲突处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">1.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">2.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">3.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设定你的Git"><span class="toc-number">1.</span> <span class="toc-text">设定你的Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的Git-Repository"><span class="toc-number">2.</span> <span class="toc-text">建立自己的Git Repository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的基本功-status-add-commit-log-gitignore"><span class="toc-number">3.</span> <span class="toc-text">Git的基本功(status, add, commit, log, .gitignore)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git流程整理"><span class="toc-number">4.</span> <span class="toc-text">Git流程整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branch"><span class="toc-number">5.</span> <span class="toc-text">Git Branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并branch到master-branch"><span class="toc-number">6.</span> <span class="toc-text">合并branch到master branch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confict-冲突处理"><span class="toc-number">7.</span> <span class="toc-text">Confict: 冲突处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消上一次的操作"><span class="toc-number">8.</span> <span class="toc-text">取消上一次的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取消已暂存的file"><span class="toc-number">9.</span> <span class="toc-text">取消已暂存的file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暂存操作-Stash"><span class="toc-number">10.</span> <span class="toc-text">暂存操作(Stash)</span></a></li></ol>
  
   </div>
 
