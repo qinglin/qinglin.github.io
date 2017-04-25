@@ -77,6 +77,77 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/04/25/HTTP方法中PUT与POST的区别/" title="HTTP方法中PUT与POST的区别" itemprop="url">HTTP方法中PUT与POST的区别</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-25T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-04-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="HTTP方法中PUT与POST的区别"><a href="#HTTP方法中PUT与POST的区别" class="headerlink" title="HTTP方法中PUT与POST的区别"></a>HTTP方法中PUT与POST的区别</h1><blockquote>
+<p>HTTP中的PUT和POST方法通常被用于创建和更新页面上的对象，但如何更精确地区分它们的区别呢？</p>
+</blockquote>
+<h2 id="幂等的概念"><a href="#幂等的概念" class="headerlink" title="幂等的概念"></a>幂等的概念</h2><blockquote>
+<p>PUT与POST方法最根本的区别是PUT是幂等的，所谓幂等是指“ PUT 方法是幂等的。幂等的方法意味着请求成功执行所得到的的结果不依赖于该方法被执行的次数。”</p>
+</blockquote>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>为了更好的理解幂等，这里有一个例子：</p>
+<pre><code>在设计图书馆的restful接口时，设计了一个创建用户的API，用户使用user{id,name}来定义
+</code></pre><p>这时候需要用API创建一个新的名字为White的user，id则为自增</p>
+<pre><code>POST: 若该用户不存在，创建一个新用户，返回201
+      若已经存在，则返回409 - Conflict
+
+PUT: 若该用户不存在，创建一个新用户，返回201
+     若已经存在，返回200或者202
+</code></pre><ul>
+<li>注意：在设计restful接口的时候，尽量要符合restful的设计规范，使POST和PUT的区别在设计中能够显现。</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HTTP，RESTful/">HTTP，RESTful</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/04/25/SQLAlchemy及ORM笔记/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
@@ -1161,6 +1232,10 @@ npm install hexo-generator-sitemap@1 --save
 		
 			
 				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTP，RESTful/" title="HTTP，RESTful">HTTP，RESTful<sup>1</sup></a></li>
 			
 		
 		</ul>

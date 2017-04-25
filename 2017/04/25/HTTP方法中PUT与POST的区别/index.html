@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>在Linux环境下安装maven | Bigwhite&#39;s Blog</title>
+    <title>HTTP方法中PUT与POST的区别 | Bigwhite&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Qinglin, Xia">
     
 
     
-    <meta name="description" content="系统要求 Java Development Kit (JDK) Maven 3.3 需安装JDK 1.7及以上版本  Memory 没有特别要求  Disk 安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间  Operating System 没有特别要求   下载安装包wget htt">
-<meta name="keywords" content="Maven，Linux">
+    <meta name="description" content="HTTP方法中PUT与POST的区别 HTTP中的PUT和POST方法通常被用于创建和更新页面上的对象，但如何更精确地区分它们的区别呢？  幂等的概念 PUT与POST方法最根本的区别是PUT是幂等的，所谓幂等是指“ PUT 方法是幂等的。幂等的方法意味着请求成功执行所得到的的结果不依赖于该方法被执行的次数。”  Example为了更好的理解幂等，这里有一个例子： 在设计图书馆的restful接口">
+<meta name="keywords" content="HTTP，RESTful">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Linux环境下安装maven">
-<meta property="og:url" content="https:qinglin.github.io/2017/01/13/Linux下安装mvn/index.html">
+<meta property="og:title" content="HTTP方法中PUT与POST的区别">
+<meta property="og:url" content="https:qinglin.github.io/2017/04/25/HTTP方法中PUT与POST的区别/index.html">
 <meta property="og:site_name" content="Bigwhite's Blog">
-<meta property="og:description" content="系统要求 Java Development Kit (JDK) Maven 3.3 需安装JDK 1.7及以上版本  Memory 没有特别要求  Disk 安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间  Operating System 没有特别要求   下载安装包wget htt">
-<meta property="og:updated_time" content="2017-04-17T01:55:26.146Z">
+<meta property="og:description" content="HTTP方法中PUT与POST的区别 HTTP中的PUT和POST方法通常被用于创建和更新页面上的对象，但如何更精确地区分它们的区别呢？  幂等的概念 PUT与POST方法最根本的区别是PUT是幂等的，所谓幂等是指“ PUT 方法是幂等的。幂等的方法意味着请求成功执行所得到的的结果不依赖于该方法被执行的次数。”  Example为了更好的理解幂等，这里有一个例子： 在设计图书馆的restful接口">
+<meta property="og:updated_time" content="2017-04-25T07:27:56.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Linux环境下安装maven">
-<meta name="twitter:description" content="系统要求 Java Development Kit (JDK) Maven 3.3 需安装JDK 1.7及以上版本  Memory 没有特别要求  Disk 安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间  Operating System 没有特别要求   下载安装包wget htt">
+<meta name="twitter:title" content="HTTP方法中PUT与POST的区别">
+<meta name="twitter:description" content="HTTP方法中PUT与POST的区别 HTTP中的PUT和POST方法通常被用于创建和更新页面上的对象，但如何更精确地区分它们的区别呢？  幂等的概念 PUT与POST方法最根本的区别是PUT是幂等的，所谓幂等是指“ PUT 方法是幂等的。幂等的方法意味着请求成功执行所得到的的结果不依赖于该方法被执行的次数。”  Example为了更好的理解幂等，这里有一个例子： 在设计图书馆的restful接口">
 
     
     <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
@@ -80,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/01/13/Linux下安装mvn/" title="在Linux环境下安装maven" itemprop="url">在Linux环境下安装maven</a>
+      <a href="/2017/04/25/HTTP方法中PUT与POST的区别/" title="HTTP方法中PUT与POST的区别" itemprop="url">HTTP方法中PUT与POST的区别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
 		
   <p class="article-time">
-    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
+    <time datetime="2017-04-25T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-04-25</time>
     
   </p>
 </header>
@@ -96,41 +96,28 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系统要求"><span class="toc-number">1.</span> <span class="toc-text">系统要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载安装包"><span class="toc-number">2.</span> <span class="toc-text">下载安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压及安装"><span class="toc-number">3.</span> <span class="toc-text">解压及安装</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP方法中PUT与POST的区别"><span class="toc-number">1.</span> <span class="toc-text">HTTP方法中PUT与POST的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#幂等的概念"><span class="toc-number">1.1.</span> <span class="toc-text">幂等的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">1.2.</span> <span class="toc-text">Example</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><ul>
-<li><p>Java Development Kit (JDK)</p>
-<pre><code>Maven 3.3 需安装JDK 1.7及以上版本
-</code></pre></li>
-<li><p>Memory</p>
-<pre><code>没有特别要求
-</code></pre></li>
-<li><p>Disk</p>
-<pre><code>安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间
-</code></pre></li>
-<li><p>Operating System</p>
-<pre><code>没有特别要求
-</code></pre></li>
+		<h1 id="HTTP方法中PUT与POST的区别"><a href="#HTTP方法中PUT与POST的区别" class="headerlink" title="HTTP方法中PUT与POST的区别"></a>HTTP方法中PUT与POST的区别</h1><blockquote>
+<p>HTTP中的PUT和POST方法通常被用于创建和更新页面上的对象，但如何更精确地区分它们的区别呢？</p>
+</blockquote>
+<h2 id="幂等的概念"><a href="#幂等的概念" class="headerlink" title="幂等的概念"></a>幂等的概念</h2><blockquote>
+<p>PUT与POST方法最根本的区别是PUT是幂等的，所谓幂等是指“ PUT 方法是幂等的。幂等的方法意味着请求成功执行所得到的的结果不依赖于该方法被执行的次数。”</p>
+</blockquote>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>为了更好的理解幂等，这里有一个例子：</p>
+<pre><code>在设计图书馆的restful接口时，设计了一个创建用户的API，用户使用user{id,name}来定义
+</code></pre><p>这时候需要用API创建一个新的名字为White的user，id则为自增</p>
+<pre><code>POST: 若该用户不存在，创建一个新用户，返回201
+      若已经存在，则返回409 - Conflict
+
+PUT: 若该用户不存在，创建一个新用户，返回201
+     若已经存在，返回200或者202
+</code></pre><ul>
+<li>注意：在设计restful接口的时候，尽量要符合restful的设计规范，使POST和PUT的区别在设计中能够显现。</li>
 </ul>
-<h2 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h2><pre><code>wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-</code></pre><h2 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h2><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
-</code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
-<pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
-</code></pre><p>在配置文件中修改</p>
-<pre><code>/etc/profile
-export PATH=/opt/apache-maven-3.3.9/bin:$PATH
-</code></pre><p>安装确认</p>
-<pre><code>mvn -v
-</code></pre><p>结果应显示为</p>
-<pre><code>Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T04:57:37-07:00)
-Maven home: /opt/apache-maven-3.3.3
-Java version: 1.8.0_45, vendor: Oracle Corporation
-Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre
-Default locale: en_US, platform encoding: UTF-8
-OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&quot;, family: &quot;mac&quot;
-</code></pre>  
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -138,7 +125,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Maven，Linux/">Maven，Linux</a>
+  <span></span> <a href="/tags/HTTP，RESTful/">HTTP，RESTful</a>
   </div>
 
 </div>
@@ -147,7 +134,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https:qinglin.github.io/2017/01/13/Linux下安装mvn/" data-title="在Linux环境下安装maven | Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="https:qinglin.github.io/2017/04/25/HTTP方法中PUT与POST的区别/" data-title="HTTP方法中PUT与POST的区别 | Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -161,21 +148,13 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/01/13/安装atlas/" title="Apache Atlas的安装和编译">
+ <a href="/2017/04/25/SQLAlchemy及ORM笔记/" title="">
   <strong>上一篇：</strong><br/>
   <span>
-  Apache Atlas的安装和编译</span>
+  (no title)</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/01/13/利用Pyhs2从Python导入数据到Hive/"  title="利用Pyhs2从Python导入数据到Hive">
- <strong>下一篇：</strong><br/> 
- <span>利用Pyhs2从Python导入数据到Hive
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -187,7 +166,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系统要求"><span class="toc-number">1.</span> <span class="toc-text">系统要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载安装包"><span class="toc-number">2.</span> <span class="toc-text">下载安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压及安装"><span class="toc-number">3.</span> <span class="toc-text">解压及安装</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP方法中PUT与POST的区别"><span class="toc-number">1.</span> <span class="toc-text">HTTP方法中PUT与POST的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#幂等的概念"><span class="toc-number">1.1.</span> <span class="toc-text">幂等的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">1.2.</span> <span class="toc-text">Example</span></a></li></ol></li></ol>
  
   </div>
 
