@@ -77,6 +77,141 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2017/04/25/SQLAlchemy及ORM笔记/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-25T06:39:17.685Z" itemprop="datePublished"> 发表于 2017-04-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="SQLAlchemy及ORM笔记"><a href="#SQLAlchemy及ORM笔记" class="headerlink" title="SQLAlchemy及ORM笔记"></a>SQLAlchemy及ORM笔记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>ORM是把Object-Oriented Programming language和SQL语句做映射的工具，而其中SQLAlchemy就是python中的其中一个ORM框架，在上<a href="https://classroom.udacity.com/courses/ud388" target="_blank" rel="external">Designing Restful API</a> 这门Udacity公开课的时候接触到了ORM和SQLAlchemy，于是想记录一下他们的概念和用法</p>
+</blockquote>
+<h2 id="SQLAlchemy的安装条件"><a href="#SQLAlchemy的安装条件" class="headerlink" title="SQLAlchemy的安装条件"></a>SQLAlchemy的安装条件</h2><ul>
+<li>Python 2.6+</li>
+<li>Python 3.3+</li>
+<li><p>Pypy 2.1+</p>
+<pre><code>pip install sqlalchemy
+</code></pre></li>
+</ul>
+<h2 id="安装数据库驱动"><a href="#安装数据库驱动" class="headerlink" title="安装数据库驱动"></a>安装数据库驱动</h2><p>SQLAlchemy默认支持SQLite3，不需要安装驱动，但对其他数据库都需要用符合Python的DBAPI标准的驱动。</p>
+<h3 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h3><p>Psycopg2提供了PostgreSQL的驱动，可以用pip install psycopg2安装</p>
+<h3 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h3><p>PyMySQL是mysql的驱动，可以用pip install pymysql安装</p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><pre><code>from sqlalchemy import create_engine
+engine = create_engine(&apos;sqlite:///puppies.db&apos;)
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/13/如何授予远程登录mysql的主机访问权限/" title="如何授予远程登录mysql的主机访问权限" itemprop="url">如何授予远程登录mysql的主机访问权限</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-04-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="如何授予远程登录mysql的主机访问权限"><a href="#如何授予远程登录mysql的主机访问权限" class="headerlink" title="如何授予远程登录mysql的主机访问权限"></a>如何授予远程登录mysql的主机访问权限</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li><p>登录mysql主机</p>
+<p> 譬如mysql的用户名密码为 <code>host,host123</code></p>
+</li>
+<li><p>键入命令</p>
+<pre><code>GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;host123&apos;;
+</code></pre><ul>
+<li>% 在这里是指所有主机的意思，即赋予所有其他host登录权限</li>
+<li>Identified by后面跟的是mysql对应用户名root的密码，这里是host123</li>
+</ul>
+</li>
+<li><p>键入命令</p>
+<pre><code>flush priviledges;
+</code></pre><p> 更新mysql中的权限设置</p>
+</li>
+</ol>
+<p>这样修改权限设置之后，就可以在主机上远程访问该ip下的mysql数据库了</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/mysql/">mysql</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2017/01/13/Install Lib in Pycharm/" title="Install Lib in Pycharm" itemprop="url">Install Lib in Pycharm</a>
   </h1>
   <p class="article-author">By
@@ -441,6 +576,9 @@ Rejected hunk #1.
 </code></pre><h2 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h2><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
 </code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
 <pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
+</code></pre><p>在配置文件中修改</p>
+<pre><code>/etc/profile
+export PATH=/opt/apache-maven-3.3.9/bin:$PATH
 </code></pre><p>安装确认</p>
 <pre><code>mvn -v
 </code></pre><p>结果应显示为</p>
@@ -1019,6 +1157,10 @@ npm install hexo-generator-sitemap@1 --save
 		
 			
 				<li><a href="/tags/Apache-Atlas-数据湖/" title="Apache Atlas,数据湖">Apache Atlas,数据湖<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
 			
 		
 		</ul>

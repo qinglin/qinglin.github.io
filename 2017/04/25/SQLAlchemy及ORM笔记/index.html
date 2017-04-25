@@ -4,30 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Apache Atlas的安装和编译 | Bigwhite&#39;s Blog</title>
+    <title>Bigwhite&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Qinglin, Xia">
     
 
     
-    <meta name="description" content="最近一直在做公司数据湖的项目，我们用的是Apache正在incubating的开源项目atlas, atlas在管理元数据方面的功能十分强大。 这篇blog是介绍如何在centos中编译和安装atlas Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git">
-<meta name="keywords" content="Apache Atlas,数据湖">
+    <meta name="description" content="SQLAlchemy及ORM笔记前言 ORM是把Object-Oriented Programming language和SQL语句做映射的工具，而其中SQLAlchemy就是python中的其中一个ORM框架，在上Designing Restful API 这门Udacity公开课的时候接触到了ORM和SQLAlchemy，于是想记录一下他们的概念和用法  SQLAlchemy的安装条件 Pyt">
+<meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Apache Atlas的安装和编译">
-<meta property="og:url" content="https:qinglin.github.io/2017/01/13/安装atlas/index.html">
+<meta property="og:title" content="Bigwhite's Blog">
+<meta property="og:url" content="https:qinglin.github.io/2017/04/25/SQLAlchemy及ORM笔记/index.html">
 <meta property="og:site_name" content="Bigwhite's Blog">
-<meta property="og:description" content="最近一直在做公司数据湖的项目，我们用的是Apache正在incubating的开源项目atlas, atlas在管理元数据方面的功能十分强大。 这篇blog是介绍如何在centos中编译和安装atlas Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git">
-<meta property="og:image" content="http://i.imgur.com/8PV1nse.png">
-<meta property="og:image" content="http://i.imgur.com/cCZkhAV.png">
-<meta property="og:image" content="http://i.imgur.com/rY5yDmV.png">
-<meta property="og:image" content="http://i.imgur.com/2SIOANs.png">
-<meta property="og:image" content="http://i.imgur.com/4p9O632.png">
-<meta property="og:updated_time" content="2017-04-14T02:38:40.178Z">
+<meta property="og:description" content="SQLAlchemy及ORM笔记前言 ORM是把Object-Oriented Programming language和SQL语句做映射的工具，而其中SQLAlchemy就是python中的其中一个ORM框架，在上Designing Restful API 这门Udacity公开课的时候接触到了ORM和SQLAlchemy，于是想记录一下他们的概念和用法  SQLAlchemy的安装条件 Pyt">
+<meta property="og:updated_time" content="2017-04-25T06:39:17.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Apache Atlas的安装和编译">
-<meta name="twitter:description" content="最近一直在做公司数据湖的项目，我们用的是Apache正在incubating的开源项目atlas, atlas在管理元数据方面的功能十分强大。 这篇blog是介绍如何在centos中编译和安装atlas Atlas的安装和编译编译Atlas 从git下载源码库 git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git">
-<meta name="twitter:image" content="http://i.imgur.com/8PV1nse.png">
+<meta name="twitter:title" content="Bigwhite's Blog">
+<meta name="twitter:description" content="SQLAlchemy及ORM笔记前言 ORM是把Object-Oriented Programming language和SQL语句做映射的工具，而其中SQLAlchemy就是python中的其中一个ORM框架，在上Designing Restful API 这门Udacity公开课的时候接触到了ORM和SQLAlchemy，于是想记录一下他们的概念和用法  SQLAlchemy的安装条件 Pyt">
 
     
     <link rel="alternative" href="/atom.xml" title="Bigwhite&#39;s Blog" type="application/atom+xml">
@@ -86,14 +80,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/01/13/安装atlas/" title="Apache Atlas的安装和编译" itemprop="url">Apache Atlas的安装和编译</a>
+      <a href="/2017/04/25/SQLAlchemy及ORM笔记/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Qinglin, Xia" target="_blank" itemprop="author">Qinglin, Xia</a>
 		
   <p class="article-time">
-    <time datetime="2017-01-13T13:28:18.000Z" itemprop="datePublished"> 发表于 2017-01-13</time>
+    <time datetime="2017-04-25T06:39:17.685Z" itemprop="datePublished"> 发表于 2017-04-25</time>
     
   </p>
 </header>
@@ -102,105 +96,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Atlas的安装和编译"><span class="toc-number">1.</span> <span class="toc-text">Atlas的安装和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译Atlas"><span class="toc-number">1.1.</span> <span class="toc-text">编译Atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas编译要求"><span class="toc-number">1.2.</span> <span class="toc-text">Atlas编译要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas安装与配置"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动atlas"><span class="toc-number">1.4.</span> <span class="toc-text">启动atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误排查"><span class="toc-number">1.5.</span> <span class="toc-text">错误排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka启动失败"><span class="toc-number">1.5.1.</span> <span class="toc-text">Kafka启动失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI-Keep-Loading"><span class="toc-number">1.5.2.</span> <span class="toc-text">UI Keep Loading</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQLAlchemy及ORM笔记"><span class="toc-number">1.</span> <span class="toc-text">SQLAlchemy及ORM笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLAlchemy的安装条件"><span class="toc-number">1.2.</span> <span class="toc-text">SQLAlchemy的安装条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装数据库驱动"><span class="toc-number">1.3.</span> <span class="toc-text">安装数据库驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PostgreSQL"><span class="toc-number">1.3.1.</span> <span class="toc-text">PostgreSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql"><span class="toc-number">1.3.2.</span> <span class="toc-text">Mysql</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接数据库"><span class="toc-number">1.4.</span> <span class="toc-text">连接数据库</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>最近一直在做公司数据湖的项目，我们用的是Apache正在incubating的开源项目atlas, atlas在管理元数据方面的功能十分强大。</p>
-<p>这篇blog是介绍如何在centos中编译和安装atlas</p>
-<h1 id="Atlas的安装和编译"><a href="#Atlas的安装和编译" class="headerlink" title="Atlas的安装和编译"></a>Atlas的安装和编译</h1><h2 id="编译Atlas"><a href="#编译Atlas" class="headerlink" title="编译Atlas"></a>编译Atlas</h2><ol>
-<li><p>从git下载源码库</p>
-<pre><code>git clone https://git-wip-us.apache.org/repos/asf/incubator-atlas.git atlas
-git checkout altas-0.7-incubating
+		<h1 id="SQLAlchemy及ORM笔记"><a href="#SQLAlchemy及ORM笔记" class="headerlink" title="SQLAlchemy及ORM笔记"></a>SQLAlchemy及ORM笔记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>ORM是把Object-Oriented Programming language和SQL语句做映射的工具，而其中SQLAlchemy就是python中的其中一个ORM框架，在上<a href="https://classroom.udacity.com/courses/ud388" target="_blank" rel="external">Designing Restful API</a> 这门Udacity公开课的时候接触到了ORM和SQLAlchemy，于是想记录一下他们的概念和用法</p>
+</blockquote>
+<h2 id="SQLAlchemy的安装条件"><a href="#SQLAlchemy的安装条件" class="headerlink" title="SQLAlchemy的安装条件"></a>SQLAlchemy的安装条件</h2><ul>
+<li>Python 2.6+</li>
+<li>Python 3.3+</li>
+<li><p>Pypy 2.1+</p>
+<pre><code>pip install sqlalchemy
 </code></pre></li>
-<li><p>切换到atlas文件夹</p>
-<pre><code>cd atlas
-</code></pre></li>
-<li><p>编译atlas</p>
-<pre><code>export MAVEN_OPTS=&quot;-Xmx1536m -XX:MaxPermSize=512m&quot; &amp;&amp; mvn clean install -DskipTests -Drat.numUnapprovedLicenses=100
-</code></pre></li>
-<li><p>skip Licenses</p>
-<pre><code>http://stackoverflow.com/questions/30181154/skipping-some-license-tests-in-maven
-
--Drat.numUnapprovedLicenses=100
-</code></pre></li>
-<li><p>Skip test cases</p>
-<pre><code>mvn install 
-</code></pre></li>
-</ol>
-<h2 id="Atlas编译要求"><a href="#Atlas编译要求" class="headerlink" title="Atlas编译要求"></a>Atlas编译要求</h2><ol>
-<li><a href="https://qinglin.github.io/2016/08/01/Install_mvn/" target="_blank" rel="external">maven版本到3.1.0以上</a></li>
-</ol>
-<h2 id="Atlas安装与配置"><a href="#Atlas安装与配置" class="headerlink" title="Atlas安装与配置"></a>Atlas安装与配置</h2><ol>
-<li>mvn clean package -Pdist -DskipTests</li>
-<li><p>编译完之后解压生成的tar包 </p>
-<pre><code>tar -xzvf apache-atlas-${project.version}-bin.tar.gz
-cd atlas-${project.version}
-</code></pre></li>
-<li><p>配置atlas参数</p>
-<p> 所有atlas参数配置都在conf文件夹下，这里主要修改atlas-application.properties的配置</p>
-<p> 配置kafka相关参数</p>
-<pre><code>atlas.notification.embedded=false
-atlas.kafka.data=${sys:atlas.home}/data/kafka
-atlas.kafka.zookeeper.connect=localhost:2181
-atlas.kafka.bootstrap.servers=fsdn1:6667
-</code></pre><p> 配置Zookeeper相关参数</p>
-<pre><code>atlas.audit.hbase.zookeeper.quorum={zookeeeper_host}:2181
-</code></pre></li>
-</ol>
-<h2 id="启动atlas"><a href="#启动atlas" class="headerlink" title="启动atlas"></a>启动atlas</h2><pre><code>bin/atlas_start.py 
-</code></pre><p>这样可在浏览器中输入：<a href="http://localhost:21000，就可以打开atlas的web页面" target="_blank" rel="external">http://localhost:21000，就可以打开atlas的web页面</a></p>
-<h2 id="错误排查"><a href="#错误排查" class="headerlink" title="错误排查"></a>错误排查</h2><h3 id="Kafka启动失败"><a href="#Kafka启动失败" class="headerlink" title="Kafka启动失败"></a>Kafka启动失败</h3><p><img src="http://i.imgur.com/8PV1nse.png" alt=""></p>
-<p><img src="http://i.imgur.com/cCZkhAV.png" alt=""></p>
-<p><img src="http://i.imgur.com/rY5yDmV.png" alt=""></p>
-<p><img src="http://i.imgur.com/2SIOANs.png" alt=""></p>
-<pre><code>论坛提问： https://community.hortonworks.com/questions/67795/fail-to-start-kafka-when-starting-the-atlas.html
-
-关闭Zookeeper，报错Connection Refused
-开启Zookeeper，报错cannot assign requested address
-</code></pre><p>Resolution:<br>修改Kafka相关参数：</p>
-<pre><code>atlas.notification.embedded=false
-</code></pre><p><a href="http://dev.hortonworks.com.s3.amazonaws.com/HDPDocuments/Ambari-Trunk/bk_ambari_reference_guide/content/ch_integrating_atlas.html_" target="_blank" rel="external">参考资料 – 集成atlas与kafka</a></p>
-<h3 id="UI-Keep-Loading"><a href="#UI-Keep-Loading" class="headerlink" title="UI Keep Loading"></a>UI Keep Loading</h3><p>如图：</p>
-<p><img src="http://i.imgur.com/4p9O632.png" alt=""></p>
-<p><a href="https://community.hortonworks.com/questions/67816/atlas-ui-keep-loading-after-logged-in.html" target="_blank" rel="external">论坛提问贴 – 多亏了这个帖子，找到了解决方案</a></p>
-<p>Resolution： </p>
-<p>根据论坛的回复，有两个解决方案，我用了第一种，就是下载hdp2.5然后把atlas web相关的文件夹覆盖掉0.7的文件夹</p>
-<ol>
-<li><p>I have replaced web folder from Sandbox(HDP 2.5 with Atlas 0.7) and it worked fine.</p>
-<pre><code>下载HDP2.5，找到usr/hdp/2.5.0.0-1245/atlas文件夹，将其中的web相关文件夹copy and replace原本atlas的对应文件夹
-![](http://i.imgur.com/CEvYjx5.png)
-</code></pre></li>
-<li><p>Download the patch and git apply it – <a href="https://issues.apache.org/jira/browse/ATLAS-1199" target="_blank" rel="external">ATLAS-1199-PATCH</a></p>
-<p> Git Apply Patch Failed (<a href="http://www.fwolf.com/blog/post/448" target="_blank" rel="external">http://www.fwolf.com/blog/post/448</a>) </p>
-<pre><code>$ git apply --reject 0001-BUG-Sybase.patch
-Checking patch source.php...
-error: while searching for:
-        // 注释
-        // 以下为几行代码片断
-error: patch failed: source.php:38
-Applying patch source.php with 1 rejects...
-Rejected hunk #1.
-</code></pre></li>
-<li><p>Full Authentication needed to access the Atlas API</p>
-<p> <a href="https://community.hortonworks.com/questions/68255/got-401-full-authentication-is-required-to-access.html" target="_blank" rel="external">论坛帖子</a></p>
-<p> Per default, Atlas uses Basic Authentication. So use your Atlas user and password, e.g. like</p>
-<pre><code>curl -s -u admin:admin http://atlas-server:21000/api/atlas/types
-</code></pre></li>
-<li><p>Out of Memory</p>
-<pre><code>https://cwiki.apache.org//confluence/display/MAVEN/OutOfMemoryError
-</code></pre></li>
-</ol>
-  
+</ul>
+<h2 id="安装数据库驱动"><a href="#安装数据库驱动" class="headerlink" title="安装数据库驱动"></a>安装数据库驱动</h2><p>SQLAlchemy默认支持SQLite3，不需要安装驱动，但对其他数据库都需要用符合Python的DBAPI标准的驱动。</p>
+<h3 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h3><p>Psycopg2提供了PostgreSQL的驱动，可以用pip install psycopg2安装</p>
+<h3 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h3><p>PyMySQL是mysql的驱动，可以用pip install pymysql安装</p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><pre><code>from sqlalchemy import create_engine
+engine = create_engine(&apos;sqlite:///puppies.db&apos;)
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Apache-Atlas-数据湖/">Apache Atlas,数据湖</a>
-  </div>
 
 </div>
 
@@ -208,7 +127,7 @@ Rejected hunk #1.
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https:qinglin.github.io/2017/01/13/安装atlas/" data-title="Apache Atlas的安装和编译 | Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="https:qinglin.github.io/2017/04/25/SQLAlchemy及ORM笔记/" data-title="Bigwhite&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -222,21 +141,13 @@ Rejected hunk #1.
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/01/13/Learning_Git/" title="Git命令大全">
+ <a href="/2017/04/13/如何授予远程登录mysql的主机访问权限/" title="如何授予远程登录mysql的主机访问权限">
   <strong>上一篇：</strong><br/>
   <span>
-  Git命令大全</span>
+  如何授予远程登录mysql的主机访问权限</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/01/13/Linux下安装mvn/"  title="在Linux环境下安装maven">
- <strong>下一篇：</strong><br/> 
- <span>在Linux环境下安装maven
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -248,7 +159,7 @@ Rejected hunk #1.
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Atlas的安装和编译"><span class="toc-number">1.</span> <span class="toc-text">Atlas的安装和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译Atlas"><span class="toc-number">1.1.</span> <span class="toc-text">编译Atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas编译要求"><span class="toc-number">1.2.</span> <span class="toc-text">Atlas编译要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Atlas安装与配置"><span class="toc-number">1.3.</span> <span class="toc-text">Atlas安装与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动atlas"><span class="toc-number">1.4.</span> <span class="toc-text">启动atlas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误排查"><span class="toc-number">1.5.</span> <span class="toc-text">错误排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka启动失败"><span class="toc-number">1.5.1.</span> <span class="toc-text">Kafka启动失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI-Keep-Loading"><span class="toc-number">1.5.2.</span> <span class="toc-text">UI Keep Loading</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQLAlchemy及ORM笔记"><span class="toc-number">1.</span> <span class="toc-text">SQLAlchemy及ORM笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLAlchemy的安装条件"><span class="toc-number">1.2.</span> <span class="toc-text">SQLAlchemy的安装条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装数据库驱动"><span class="toc-number">1.3.</span> <span class="toc-text">安装数据库驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PostgreSQL"><span class="toc-number">1.3.1.</span> <span class="toc-text">PostgreSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql"><span class="toc-number">1.3.2.</span> <span class="toc-text">Mysql</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接数据库"><span class="toc-number">1.4.</span> <span class="toc-text">连接数据库</span></a></li></ol></li></ol>
  
   </div>
 

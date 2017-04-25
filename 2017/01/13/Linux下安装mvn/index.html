@@ -18,7 +18,7 @@
 <meta property="og:url" content="https:qinglin.github.io/2017/01/13/Linux下安装mvn/index.html">
 <meta property="og:site_name" content="Bigwhite's Blog">
 <meta property="og:description" content="系统要求 Java Development Kit (JDK) Maven 3.3 需安装JDK 1.7及以上版本  Memory 没有特别要求  Disk 安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间  Operating System 没有特别要求   下载安装包wget htt">
-<meta property="og:updated_time" content="2017-04-14T03:00:24.658Z">
+<meta property="og:updated_time" content="2017-04-17T01:55:26.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Linux环境下安装maven">
 <meta name="twitter:description" content="系统要求 Java Development Kit (JDK) Maven 3.3 需安装JDK 1.7及以上版本  Memory 没有特别要求  Disk 安装maven大概需要10M左右的硬盘，除此以外，对于本地的maven仓库也需要额外的硬盘空间，这取决于你的使用情况，但理想状况下最好留出至少500M的硬盘空间  Operating System 没有特别要求   下载安装包wget htt">
@@ -118,6 +118,9 @@
 </code></pre><h2 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h2><pre><code>tar xzvf apache-maven-3.3.9-bin.tar.gz
 </code></pre><p>修改环境变量 – 把opt改为apache maven的当前路径</p>
 <pre><code>export PATH=/opt/apache-maven-3.3.9/bin:$PATH
+</code></pre><p>在配置文件中修改</p>
+<pre><code>/etc/profile
+export PATH=/opt/apache-maven-3.3.9/bin:$PATH
 </code></pre><p>安装确认</p>
 <pre><code>mvn -v
 </code></pre><p>结果应显示为</p>
@@ -228,6 +231,10 @@ OS name: &quot;mac os x&quot;, version: &quot;10.8.5&quot;, arch: &quot;x86_64&q
 		
 			
 				<li><a href="/tags/Apache-Atlas-数据湖/" title="Apache Atlas,数据湖">Apache Atlas,数据湖<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
 			
 		
 		</ul>
